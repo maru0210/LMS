@@ -1,4 +1,4 @@
-export default function Home() {
+export default function Root() {
   return (
     <div className="flex flex-col gap-4 px-8 py-4">
       <a href="/login">/login</a>
