@@ -11,5 +11,5 @@ export default async function getServerClient() {
     redirect('/login')
   }
 
-  return supabase
+  return {supabase: supabase, user: data.user}
 }
