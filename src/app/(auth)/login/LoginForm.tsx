@@ -2,7 +2,7 @@
 
 import {useActionState} from "react"
 import loginHandler from "@/app/(auth)/login/loginHandler";
-import AuthFormInput from "@/app/(auth)/AuthFormInput";
+import AuthFormInput from "@/app/(auth)/components/AuthFormInput";
 
 export default function LoginForm() {
   const [state, formAction] = useActionState(loginHandler, null)
