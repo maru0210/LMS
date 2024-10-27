@@ -13,7 +13,7 @@ export default function LoginForm() {
         <p className="py-12 text-2xl font-bold">ログイン</p>
       </div>
 
-      <form action={formAction} className="flex-[3] space-y-8 space-y-reverse">
+      <form action={formAction} className="flex-[3] flex flex-col gap-8">
         {state && (
           <div className="px-4 py-2.5 rounded-lg border-2 border-red-300 bg-red-50 shadow-sm">
             <p>{state}</p>
