@@ -1,9 +1,9 @@
-import {logout} from "@/app/lib/supabase/auth";
+// import {logout} from "@/app/lib/supabase/auth";
 import Navigation from "@/app/(private)/components/Navigation";
 import getServerClient from "@/app/lib/supabase/getServerClient";
 
 export default async function Home() {
-  const supabase = await getServerClient()
+  const {supabase, user} = await getServerClient()
 
   const profile = await supabase.from('profiles').select()
   const name = profile.data?.at(0).name as string;
@@ -16,7 +16,7 @@ export default async function Home() {
           <p className="mx-2.5 my-1">2-10 アルゴリズムとデータ構造</p>
         </div>
       </div>
-      {/*<p>{name}:{data.user.email}</p>*/}
+      <p>{name}:{user.email}</p>
       {/*<button onClick={logout}>ログアウト</button>*/}
     </Navigation>
   )
