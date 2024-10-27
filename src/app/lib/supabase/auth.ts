@@ -48,8 +48,7 @@ export async function register(formData: FormData) {
 export async function logout() {
   const supabase = await createClient()
 
-  // TODO: check scope, global or local
-  const {error} = await supabase.auth.signOut()
+  const {error} = await supabase.auth.signOut({scope: "local"})
 
   if (error) {
     redirect('/error')
