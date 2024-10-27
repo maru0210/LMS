@@ -1,10 +1,10 @@
 'use client'
 
-import {ReactNode} from "react";
+import {ReactNode, useEffect, useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
 
-const navList = [
+const defaultNavList = [
   {name: "ホーム", href: "/home", svg: "/home.svg", current: false},
   {name: "チャット", href: "/chat", svg: "/chat.svg", current: false}
 ]
@@ -23,11 +23,17 @@ const NavItem = (
 )
 
 export default function Navigation({children}: { children: ReactNode }) {
+  const [navList, setNavList] = useState(defaultNavList);
   const pathname = usePathname()
 
-  navList.forEach(nav => {
-    if (nav.href == pathname) nav.current = true;
-  })
+  useEffect(() => {
+    const _navList = defaultNavList.map(nav => {
+      if (nav.href == pathname) nav.current = true;
+      return nav;
+    })
+    setNavList(_navList);
+  }, [pathname])
+
 
   return (
     <div className="flex h-screen">
