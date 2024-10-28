@@ -13,7 +13,7 @@ export default function RegisterForm() {
         <p className="py-12 text-2xl font-bold">新規登録</p>
       </div>
 
-      <form action={formAction} className="flex-[3] flex flex-col gap-8">
+      <form action={formAction} className="flex-[3] flex flex-col gap-8 pb-8">
         {state && (
           <div className="px-4 py-2.5 rounded-lg border-2 border-red-300 bg-red-50 shadow-sm">
             <p>{state}</p>
