@@ -4,14 +4,16 @@ import {createClient} from "microcms-js-sdk";
 //ブログの型定義
 export type Content = {
   id: string;
-  chapter: {
-    id: string;
-    number: number;
-    title: string;
-  } & MicroCMSDate;
+  chapter: Chapter;
   section: number;
   title: string;
   content: string;
+} & MicroCMSDate;
+
+export type Chapter = {
+  id: string;
+  title: string;
+  number: number;
 } & MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -27,6 +29,13 @@ export const client = createClient({
   serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN,
   apiKey: process.env.MICROCMS_API_KEY,
 });
+
+export const getChapters = async (queries?: MicroCMSQueries) => {
+  return await client.getList<Chapter>({
+    endpoint: "chapters",
+    queries,
+  })
+}
 
 // ブログ一覧を取得
 export const getList = async (queries?: MicroCMSQueries) => {
