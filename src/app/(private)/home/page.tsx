@@ -1,15 +1,16 @@
 // import {logout} from "@/app/lib/supabase/auth";
 import Navigation from "@/app/(private)/components/Navigation";
-import getServerClient from "@/app/lib/supabase/getServerClient";
-import {getList} from "@/app/lib/microCMS/microcms";
+// import getServerClient from "@/app/lib/supabase/getServerClient";
+import {getChapters, getList} from "@/app/lib/microCMS/microcms";
 
 export default async function Home() {
-  const {supabase, user} = await getServerClient()
+  // const {supabase} = await getServerClient()
 
-  const profile = await supabase.from('profiles').select()
-  const name = profile.data?.at(0).name as string;
+  // const profile = await supabase.from('profiles').select()
+  // const name = profile.data?.at(0).name as string;
 
-  const list = await getList();
+  const chapters = await getChapters({orders: "number"});
+  const list = await getList({orders: "section"});
 
   return (
     <Navigation>
@@ -20,10 +21,17 @@ export default async function Home() {
         </div>
       </div>
 
-      <div>
-        {list.contents.map((item, index) => (
-          <div>
-            <p>{item.title}</p>
+      <div className="flex flex-col gap-8">
+        {chapters.contents.map((chapter, index) => (
+          <div key={index}>
+            <p>{chapter.number + "章 " + chapter.title}</p>
+            {list.contents.filter(
+              item => item.chapter.number === chapter.number
+            ).map((item, index) => (
+              <div key={index}>
+                {item.chapter.number + "-" + item.section + ": " + item.title}
+              </div>
+            ))}
           </div>
         ))}
       </div>
