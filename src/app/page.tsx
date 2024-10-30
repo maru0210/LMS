@@ -1,9 +1,11 @@
+import Link from "next/link";
+
 export default function Root() {
   return (
     <div className="flex flex-col gap-4 px-8 py-4">
-      <a href="/login">/login</a>
-      <a href="/register">/register</a>
-      <a href="/home">/home</a>
+      <Link href="/login">/login</Link>
+      <Link href="/register">/register</Link>
+      <Link href="/home">/home</Link>
     </div>
   );
 }
