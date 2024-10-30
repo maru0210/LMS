@@ -3,6 +3,7 @@
 import {useActionState} from "react"
 import registerHandler from "@/app/(auth)/register/registerHandler";
 import AuthFormInput from "@/app/(auth)/components/AuthFormInput";
+import Link from "next/link";
 
 export default function RegisterForm() {
   const [state, formAction] = useActionState(registerHandler, null)
@@ -34,10 +35,10 @@ export default function RegisterForm() {
 
         <div className="space-y-2">
           <p className="ml-0.5">すでに登録済みの方</p>
-          <a
+          <Link
             href="/login"
             className="block w-full rounded-lg py-2.5 ring-0 bg-lime-600 text-white text-center"
-          >ログインページ</a>
+          >ログインページ</Link>
         </div>
       </form>
     </div>
