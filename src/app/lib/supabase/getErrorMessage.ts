@@ -7,6 +7,6 @@ export default function getErrorMessage(error: AuthError) {
     case "invalid_credentials":
       return "メールアドレスまたはパスワードが間違っています。"
     default:
-      return "Unexpected Error: " + error.code
+      return "Error: " + error.code
   }
 }
