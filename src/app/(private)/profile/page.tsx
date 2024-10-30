@@ -1,9 +1,17 @@
 import Navigation from "@/app/(private)/components/Navigation";
+import {logout} from "@/app/lib/supabase/auth";
+import getServerClient from "@/app/lib/supabase/getServerClient";
 
-export default function Profile() {
+export default async function Profile() {
+  const {supabase} = await getServerClient()
+
   return (
     <Navigation>
-      <p>aiueo</p>
+      <div className="flex flex-col">
+        <div>
+          <button onClick={logout}>ログアウト</button>
+        </div>
+      </div>
     </Navigation>
   )
 }
