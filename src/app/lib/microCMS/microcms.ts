@@ -1,13 +1,18 @@
 import type {MicroCMSDate, MicroCMSQueries,} from "microcms-js-sdk";
 import {createClient} from "microcms-js-sdk";
 
-//ブログの型定義
+// コンテンツの型定義
 export type Content = {
   id: string;
   chapter: Chapter;
   section: number;
   title: string;
   content: string;
+  questions: [{
+    fieldId: string;
+    text: string;
+    answer: string;
+  }]
 } & MicroCMSDate;
 
 export type Chapter = {
