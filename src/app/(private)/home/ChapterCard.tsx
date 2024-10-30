@@ -1,10 +1,10 @@
-import {Chapter, getList} from "@/app/lib/microCMS/microcms";
+import {Chapter, getContents} from "@/app/lib/microCMS/microcms";
 import Link from "next/link";
 
 export default async function ChapterCard(
   {chapter}: { chapter: Chapter }
 ) {
-  const {contents} = await getList({
+  const {contents} = await getContents({
     fields: "id,chapter,section,title",
     filters: `chapter[equals]${chapter.id}`,
     orders: "section"
@@ -20,7 +20,7 @@ export default async function ChapterCard(
 
       <div className="flex flex-col gap-1 text-sm">
         {contents.map(content => (
-          <Link href={"#"} className="px-1" key={content.id}>
+          <Link href={`/contents/${content.chapter.id}/${content.id}`} className="px-1" key={content.id}>
             {`${content.section}. ${content.title}`}
           </Link>
         ))}
