@@ -3,6 +3,7 @@
 import {ReactNode, useEffect, useState} from "react";
 import Image from "next/image";
 import {usePathname} from "next/navigation";
+import Link from "next/link";
 
 const defaultNavList = [
   {name: "ホーム", href: "/home", svg: "/home.svg", current: false},
@@ -12,14 +13,14 @@ const defaultNavList = [
 const NavItem = (
   props: { name: string, href: string, svg: string, current: boolean }
 ) => (
-  <a href={props.href}
-     className={
-       "flex items-center gap-2 rounded-lg px-2 py-1 transition "
-       + (props.current ? "bg-gray-50" : "hover:bg-gray-100")
-     }>
+  <Link href={props.href}
+        className={
+          "flex items-center gap-2 rounded-lg px-2 py-1 transition "
+          + (props.current ? "bg-gray-50" : "hover:bg-gray-100")
+        }>
     <Image src={props.svg} alt={props.name} width={24} height={24}/>
     <span className="mt-0.5">{props.name}</span>
-  </a>
+  </Link>
 )
 
 export default function Navigation({children}: { children: ReactNode }) {
