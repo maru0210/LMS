@@ -63,8 +63,10 @@ export default function Navigation({children}: { children: ReactNode }) {
 
       </div>
 
-      <div className="flex-1 p-8">
-        {children}
+      <div className="flex-1 overflow-auto">
+        <div className="p-8">
+          {children}
+        </div>
       </div>
     </div>
   )
