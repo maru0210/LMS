@@ -29,7 +29,7 @@ export default function Navigation({children}: { children: ReactNode }) {
 
   useEffect(() => {
     const _navList = defaultNavList.map(nav => {
-      if (nav.href == pathname) nav.current = true;
+      nav.current = (nav.href == pathname);
       return nav;
     })
     setNavList(_navList);
