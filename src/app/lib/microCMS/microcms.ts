@@ -37,15 +37,15 @@ export const getChapters = async (queries?: MicroCMSQueries) => {
   })
 }
 
-// ブログ一覧を取得
-export const getList = async (queries?: MicroCMSQueries) => {
+// 学習コンテンツ一覧を取得
+export const getContents = async (queries?: MicroCMSQueries) => {
   return await client.getList<Content>({
     endpoint: "contents",
     queries,
   });
 };
 
-// ブログの詳細を取得
+// 学習コンテンツの詳細を取得
 export const getDetail = async (
   contentId: string,
   queries?: MicroCMSQueries
