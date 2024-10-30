@@ -1,27 +1,29 @@
-import {getDetail, getList} from "@/app/lib/microCMS/microcms";
-import {notFound} from "next/navigation";
+import {getDetail, getContents} from "@/app/lib/microCMS/microcms";
+import Navigation from "@/app/(private)/components/Navigation";
 
 export async function generateStaticParams() {
-  const {contents} = await getList()
+  const {contents} = await getContents()
 
-  return contents.map((content) => ({
+  return contents.map(content => ({
     chapter: content.chapter.id,
-    id: content.id,
+    section: content.id,
   }))
 }
 
 export default async function DetailPage(
-  {params: {postId}}: {params: {postId: string}}
+  props: { params: Promise<{ chapter: string, section: string }> }
 ) {
-  const post = await getDetail(postId)
+  const {chapter, section} = await props.params;
 
-  if(!post) {
-    notFound()
-  }
+  const post = await getDetail(section);
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-    </div>
+    <Navigation>
+      <div>
+        <h1>{chapter + "-" + section + ":"}</h1>
+        <div dangerouslySetInnerHTML={{__html: post.content}}/>
+        <p>あいうえお</p>
+      </div>
+    </Navigation>
   )
 }
