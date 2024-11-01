@@ -1,9 +1,8 @@
-import Navigation from "@/app/(private)/components/Navigation";
-import {logout} from "@/app/lib/supabase/auth";
-import getServerClient from "@/app/lib/supabase/getServerClient";
+import Navigation from "@/app/components/Navigation";
+import {auth, logout} from "@/app/lib/supabase/auth";
 
 export default async function Profile() {
-  const {supabase} = await getServerClient()
+  await auth()
 
   return (
     <Navigation>
