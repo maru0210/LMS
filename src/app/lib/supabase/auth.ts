@@ -64,3 +64,20 @@ export async function logout() {
     redirect('/error')
   }
 }
+
+export async function auth() {
+  const supabase = await createClient()
+
+  const {data, error} = await supabase.auth.getUser()
+  if (data.user && error) redirect('/error')
+  if (!data.user) redirect('/login')
+}
+
+export async function authAdmin() {
+  await auth();
+
+  const supabase = await createClient()
+  if ((await supabase.from("profiles").select()).data?.at(0).is_admin === false) {
+    redirect('/home')
+  }
+}
