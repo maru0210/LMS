@@ -7,10 +7,15 @@ import Link from "next/link";
 
 const defaultNavList = [
   {name: "ホーム", href: "/home", svg: "/home.svg", current: false},
-  {name: "チャット", href: "/chat", svg: "/chat.svg", current: false}
+  {name: "チャット", href: "/chat", svg: "/chat.svg", current: false},
+  {name: "プロフィール", href: "/profile", svg: "/user.svg", current: false}
 ]
 
-const NavItem = (
+const defaultAdmNavList = [
+  {name: "コンテンツ", href: "/admin", svg: "/gear.svg", current: false},
+]
+
+export const NavItem = (
   props: { name: string, href: string, svg: string, current: boolean }
 ) => (
   <Link href={props.href}
@@ -24,17 +29,20 @@ const NavItem = (
 )
 
 export default function Navigation({children}: { children: ReactNode }) {
-  const [navList, setNavList] = useState(defaultNavList);
   const pathname = usePathname()
 
+  const isAdmin = pathname.split("/").at(1) === "admin"
+  const _navList = isAdmin ? defaultAdmNavList : defaultNavList
+
+  const [navList, setNavList] = useState(_navList);
+
   useEffect(() => {
-    const _navList = defaultNavList.map(nav => {
+    const newNavList = _navList.map(nav => {
       nav.current = (nav.href == pathname);
       return nav;
     })
-    setNavList(_navList);
-  }, [pathname])
-
+    setNavList(newNavList);
+  }, [_navList, pathname])
 
   return (
     <div className="flex h-screen">
@@ -42,7 +50,9 @@ export default function Navigation({children}: { children: ReactNode }) {
         <div className="flex flex-col h-full p-3 pt-0 text-lg">
           <p className="mx-2 my-8">学習管理システム</p>
 
-          <ul className="flex flex-col gap-2 text-gray-900">
+          <ul className={
+            "flex flex-col gap-2 h-full text-gray-900" + (!isAdmin ? " [&>*:last-child]:mt-auto" : "")
+          }>
             {navList.map((item, index) => {
               return (
                 <li key={index}>
@@ -52,14 +62,14 @@ export default function Navigation({children}: { children: ReactNode }) {
             })}
           </ul>
 
-          <div className="mt-auto text-gray-900">
-            <NavItem
-              name={"プロフィール"}
-              href={"/profile"}
-              svg={"/user.svg"}
-              current={pathname === "/profile"}
-            />
-          </div>
+          {/*<div className="mt-auto text-gray-900">*/}
+          {/*  <NavItem*/}
+          {/*    name={"プロフィール"}*/}
+          {/*    href={"/profile"}*/}
+          {/*    svg={"/user.svg"}*/}
+          {/*    current={pathname === "/profile"}*/}
+          {/*  />*/}
+          {/*</div>*/}
         </div>
 
       </div>
