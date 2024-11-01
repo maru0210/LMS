@@ -1,21 +1,24 @@
-import {getDetail, getContents} from "@/app/lib/microCMS/microcms";
-import Navigation from "@/app/(private)/components/Navigation";
-
-export async function generateStaticParams() {
-  const {contents} = await getContents()
-
-  return contents.map(content => ({
-    chapter: content.chapter.id,
-    section: content.id,
-  }))
-}
+import {getDetail} from "@/app/lib/microCMS/microcms";
+import Navigation from "@/app/components/Navigation";
+import {auth} from "@/app/lib/supabase/auth";
+import {notFound} from "next/navigation";
+import {createClient} from "@/app/utils/supabase/server";
 
 export default async function DetailPage(
   props: { params: Promise<{ chapter: string, section: string }> }
 ) {
-  const {section} = await props.params;
+  await auth();
+
+  const {chapter, section} = await props.params;
+
+  const supabase = await createClient()
+  const {data} = await supabase.from("contents").select().eq("id", section);
+  // 未登録のコンテンツはnotFound
+  if(!data || !data?.length) notFound()
 
   const post = await getDetail(section);
+  // チャプターのidが違ったらnotFound
+  if(post.chapter.id !== chapter) notFound()
 
   return (
     <Navigation>
@@ -31,11 +34,12 @@ export default async function DetailPage(
 
         <div className="border-b-4 border-lime-200 border-dashed" />
 
-        <div>
-          <h1>確認テスト</h1>
+        <div className="p-4 shadow">
+          <h1 className="mb-4 border-b-2 pb-1 border-gray-200 text-xl">確認テスト</h1>
           <div>
-            {post.questions.map((question, i) => (
+            {post.questions && post.questions.map((question, i) => (
               <div key={i}>
+                <p><span className="pr-0.5">問</span>{i+1}</p>
                 <p>{question.text}</p>
               </div>
             ))}
