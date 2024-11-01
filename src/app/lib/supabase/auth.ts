@@ -21,6 +21,11 @@ export async function login(formData: FormData) {
     return error
   }
 
+  if ((await supabase.from("profiles").select()).data?.at(0).is_admin) {
+    revalidatePath('/admin', 'layout')
+    redirect('/admin')
+  }
+
   revalidatePath('/home', 'layout')
   redirect('/home')
 }
