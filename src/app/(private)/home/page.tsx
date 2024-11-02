@@ -11,10 +11,10 @@ export default async function Home() {
   // const profile = await supabase.from('profiles').select()
   // const name = profile.data?.at(0).name as string;
 
-  const contents = await supabase.from("contents").select().order("chapter")
+  const {data: contents} = await supabase.from("contents").select().order("chapter")
 
   const chapters = Array.from(
-    new Map(contents.data?.map((content) => [content.chapter, content.chapter as number])).values()
+    new Map(contents?.map((content) => [content.chapter, content.chapter_id])).values()
   );
 
   return (
@@ -31,11 +31,11 @@ export default async function Home() {
 
         <div className="flex flex-wrap gap-8">
           {chapters.map(chapter => (
-            <ChapterCard chapterNumber={chapter} key={chapter}/>
+            <ChapterCard chapterId={chapter} key={chapter}/>
           ))}
 
           {chapters.map(chapter => (
-            <ChapterCard chapterNumber={chapter} key={chapter}/>
+            <ChapterCard chapterId={chapter} key={chapter}/>
           ))}
         </div>
       </div>
