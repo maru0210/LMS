@@ -6,6 +6,7 @@ import {deleteDbContents, getDbContents, insertDbContents} from "@/app/(admin)/a
 export type TableContent = {
   id: string
   chapter: number
+  chapterId: string
   section: number
   title: string
 }
