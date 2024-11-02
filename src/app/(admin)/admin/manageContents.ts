@@ -13,6 +13,7 @@ export async function getDbContents() {
   return contents.map<TableContent>(content => ({
     id: content.id,
     chapter: content.chapter,
+    chapterId: content.chapter_id,
     section: content.section,
     title: content.title
   }))
@@ -23,6 +24,7 @@ export async function insertDbContents(content: TableContent) {
   await supabase.from("contents").insert({
     id: content.id,
     chapter: content.chapter,
+    chapter_id: content.chapterId,
     section: content.section,
     title: content.title
   })
@@ -43,6 +45,7 @@ export async function getCmsContents() {
   return contents.map<TableContent>(content => ({
     id: content.id,
     chapter: content.chapter.number,
+    chapterId: content.chapter.id,
     section: content.section,
     title: content.title
   }))

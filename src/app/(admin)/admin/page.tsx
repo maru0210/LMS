@@ -2,6 +2,7 @@ import Navigation from "@/app/components/Navigation";
 import {authAdmin, logout} from "@/app/lib/supabase/auth";
 import ContentsManager from "@/app/(admin)/admin/ContentsManager";
 import {getCmsContents, getDbContents} from "@/app/(admin)/admin/manageContents";
+import SectionManager from "@/app/(admin)/admin/SectionManager";
 
 export default async function Admin() {
   await authAdmin()
@@ -15,6 +16,8 @@ export default async function Admin() {
           defaultDbContents={await getDbContents()}
           defaultCmsContents={await getCmsContents()}
         />
+
+        <SectionManager/>
 
         <div>
           <button onClick={logout}>ログアウト</button>
