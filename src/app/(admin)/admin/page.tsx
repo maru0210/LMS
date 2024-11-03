@@ -9,7 +9,7 @@ export default async function Admin() {
 
   return (
     <Navigation>
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-8">
         <h1 className="text-2xl">コンテンツ管理</h1>
 
         <ContentsManager
