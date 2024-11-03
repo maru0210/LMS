@@ -28,7 +28,9 @@ export const NavItem = (
   </Link>
 )
 
-export default function Navigation({children}: { children: ReactNode }) {
+export default function Navigation(
+  {autoPadding = true, children}: { autoPadding?: boolean, children: ReactNode },
+) {
   const pathname = usePathname()
 
   const isAdmin = pathname.split("/").at(1) === "admin"
@@ -61,21 +63,12 @@ export default function Navigation({children}: { children: ReactNode }) {
               )
             })}
           </ul>
-
-          {/*<div className="mt-auto text-gray-900">*/}
-          {/*  <NavItem*/}
-          {/*    name={"プロフィール"}*/}
-          {/*    href={"/profile"}*/}
-          {/*    svg={"/user.svg"}*/}
-          {/*    current={pathname === "/profile"}*/}
-          {/*  />*/}
-          {/*</div>*/}
         </div>
 
       </div>
 
       <div className="flex-1 overflow-auto">
-        <div className="p-8">
+        <div className={"h-full " + (autoPadding ? "p-8" : "")}>
           {children}
         </div>
       </div>
