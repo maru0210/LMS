@@ -12,7 +12,7 @@ export type TableContent = {
 }
 
 function Table(
-  {contents, action}: { contents: TableContent[], action: (content: TableContent) => void }
+  {contents, action, actionLabel}: { contents: TableContent[], action: (content: TableContent) => void, actionLabel: string },
 ) {
   return (
     <div className="rounded-lg p-4 shadow">
@@ -23,7 +23,7 @@ function Table(
           <th>チャプター</th>
           <th>セクション</th>
           <th>タイトル</th>
-          <th>追加</th>
+          <th>操作</th>
         </tr>
         </thead>
 
@@ -36,7 +36,7 @@ function Table(
             <td>{content.title}</td>
             <td className="flex justify-center">
               <button onClick={() => action(content)}>
-                追加
+                {actionLabel}
               </button>
             </td>
           </tr>
@@ -85,17 +85,27 @@ export default function ContentsManager(
 
   return (
     <div>
-      <button className="mb-8" onClick={dbContents.update}>DB更新</button>
+      <h2 className="mb-4 text-xl">学習コンテンツの登録</h2>
+
+      {/*<button className="mb-8" onClick={dbContents.update}>DB更新</button>*/}
 
       <div className="flex gap-8">
         <div className="flex-1">
-          <h2>登録済み</h2>
-          <Table contents={dbContents.contents} action={dbContents.delete}/>
+          <h2 className="mb-2 text-center">登録済み</h2>
+          <Table
+            contents={dbContents.contents}
+            action={dbContents.delete}
+            actionLabel={"削除"}
+          />
         </div>
 
         <div className="flex-1">
-          <h2>未登録</h2>
-          <Table contents={cmsContents.contents} action={dbContents.add}/>
+          <h2 className="mb-2 text-center">未登録</h2>
+          <Table
+            contents={cmsContents.contents}
+            action={dbContents.add}
+            actionLabel={"追加"}
+          />
         </div>
       </div>
 
