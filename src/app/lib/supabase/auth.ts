@@ -21,7 +21,7 @@ export async function login(formData: FormData) {
     return error
   }
 
-  if ((await supabase.from("profiles").select()).data?.at(0).is_admin) {
+  if (await isAdminUser()) {
     revalidatePath('/admin', 'layout')
     redirect('/admin')
   }
@@ -65,6 +65,17 @@ export async function logout() {
   }
 }
 
+export async function isAdminUser() {
+  const supabase = await createClient()
+
+  const {data} = await supabase.from("profiles").select()
+  if(data && data.length === 1) {
+    return data[0].is_admin
+  } else {
+    return redirect('/error');
+  }
+}
+
 export async function auth() {
   const supabase = await createClient()
 
@@ -76,8 +87,7 @@ export async function auth() {
 export async function authAdmin() {
   await auth();
 
-  const supabase = await createClient()
-  if ((await supabase.from("profiles").select()).data?.at(0).is_admin === false) {
+  if (!await isAdminUser()) {
     redirect('/home')
   }
 }

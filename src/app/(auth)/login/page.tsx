@@ -1,12 +1,14 @@
 import {createClient} from "@/app/utils/supabase/server";
 import {redirect} from "next/navigation";
 import LoginForm from "@/app/(auth)/login/LoginForm";
+import {isAdminUser} from "@/app/lib/supabase/auth";
 
 export default async function LoginPage() {
   const supabase = await createClient()
 
   const {data} = await supabase.auth.getUser()
   if (data?.user) {
+    if(await isAdminUser()) redirect('/admin');
     redirect('/home');
   }
 
