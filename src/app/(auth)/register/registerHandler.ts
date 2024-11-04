@@ -1,12 +1,12 @@
 "use server"
 
 import {register} from "@/app/lib/supabase/auth";
-import getErrorMessage from "@/app/lib/supabase/getErrorMessage";
+import getAuthErrorMessage from "@/app/lib/supabase/getAuthErrorMessage";
 
 export default async function registerHandler(
   prevState: string | null, formData: FormData
 ) {
   const error = await register(formData)
 
-  return getErrorMessage(error)
+  return getAuthErrorMessage(error)
 }

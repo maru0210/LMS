@@ -1,9 +1,11 @@
 import {AuthError} from "@supabase/auth-js";
 
-export default function getErrorMessage(error: AuthError) {
-  switch(error.code) {
+export default function getAuthErrorMessage(error?: AuthError) {
+  if(!error) return null;
+
+  switch (error.code) {
     case undefined:
-      return "エラーは発生していません。"
+      return null
     case "invalid_credentials":
       return "メールアドレスまたはパスワードが間違っています。"
     default:
