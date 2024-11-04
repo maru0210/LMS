@@ -1,8 +1,8 @@
 import Navigation from "@/app/components/Navigation";
-import {auth, logout} from "@/app/lib/supabase/auth";
+import {checkStatus, logout} from "@/app/lib/supabase/auth";
 
 export default async function Profile() {
-  await auth()
+  await checkStatus("student")
 
   return (
     <Navigation>

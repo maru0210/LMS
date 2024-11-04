@@ -1,11 +1,12 @@
 import Navigation from "@/app/components/Navigation";
-import {authAdmin, logout} from "@/app/lib/supabase/auth";
+import {checkStatus, logout} from "@/app/lib/supabase/auth";
+
 import ContentsManager from "@/app/(admin)/admin/ContentsManager";
-import {getCmsContents, getDbContents} from "@/app/(admin)/admin/manageContents";
 import SectionManager from "@/app/(admin)/admin/SectionManager";
+import {getCmsContents, getDbContents} from "@/app/(admin)/admin/manageContents";
 
 export default async function Admin() {
-  await authAdmin()
+  await checkStatus("administer")
 
   return (
     <Navigation>

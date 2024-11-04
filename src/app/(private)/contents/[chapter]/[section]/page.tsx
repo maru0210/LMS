@@ -1,13 +1,13 @@
-import {getDetail} from "@/app/lib/microCMS/microcms";
-import Navigation from "@/app/components/Navigation";
-import {auth} from "@/app/lib/supabase/auth";
 import {notFound} from "next/navigation";
 import {createClient} from "@/app/utils/supabase/server";
+import Navigation from "@/app/components/Navigation";
+import {checkStatus} from "@/app/lib/supabase/auth";
+import {getDetail} from "@/app/lib/microCMS/microcms";
 
 export default async function DetailPage(
   props: { params: Promise<{ chapter: string, section: string }> }
 ) {
-  await auth();
+  await checkStatus("student");
 
   const {chapter, section} = await props.params;
 

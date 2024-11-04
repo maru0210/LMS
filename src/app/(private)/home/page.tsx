@@ -1,15 +1,12 @@
-import {auth} from "@/app/lib/supabase/auth";
 import Navigation from "@/app/components/Navigation";
 import ChapterCard from "@/app/(private)/home/ChapterCard";
 import {createClient} from "@/app/utils/supabase/server";
+import {checkStatus} from "@/app/lib/supabase/auth";
 
 export default async function Home() {
-  await auth()
+  await checkStatus("student");
 
   const supabase = await createClient()
-
-  // const profile = await supabase.from('profiles').select()
-  // const name = profile.data?.at(0).name as string;
 
   const {data: contents} = await supabase.from("contents").select().order("chapter")
 
