@@ -1,9 +1,8 @@
 'use server'
 
-import {revalidatePath} from 'next/cache'
 import {redirect} from 'next/navigation'
-
 import {createClient} from '@/app/utils/supabase/server'
+import {Database} from "../../../../database.types";
 
 export async function login(formData: FormData) {
   const supabase = await createClient()
@@ -17,17 +16,9 @@ export async function login(formData: FormData) {
 
   const {error} = await supabase.auth.signInWithPassword(data)
 
-  if (error) {
-    return error
-  }
+  if (error) return error
 
-  if (await isAdminUser()) {
-    revalidatePath('/admin', 'layout')
-    redirect('/admin')
-  }
-
-  revalidatePath('/home', 'layout')
-  redirect('/home')
+  await checkSession()
 }
 
 export async function register(formData: FormData) {
@@ -47,12 +38,9 @@ export async function register(formData: FormData) {
 
   const {error} = await supabase.auth.signUp(data)
 
-  if (error) {
-    return error
-  }
+  if (error) return error
 
-  revalidatePath('/home', 'layout')
-  redirect('/home')
+  await checkSession()
 }
 
 export async function logout() {
@@ -65,29 +53,58 @@ export async function logout() {
   }
 }
 
-export async function isAdminUser() {
-  const supabase = await createClient()
+// ----- //
 
-  const {data} = await supabase.from("profiles").select()
-  if(data && data.length === 1) {
-    return data[0].is_admin
-  } else {
-    return redirect('/error');
+export async function getUserStatus() {
+  const supabase = await createClient()
+  const user = (await supabase.auth.getUser()).data.user
+
+  if (user) {
+    const {data: profile} = await supabase.from("profiles").select().eq("id", user.id);
+
+    if (profile?.length === 1) {
+      return profile[0].status;
+    }
+  }
+
+  return null
+}
+
+export async function checkSession() {
+  const userStatus = await getUserStatus();
+
+  switch (userStatus) {
+    case null:
+      return;
+    case "student":
+      return redirect("/home");
+    case "teacher":
+      return redirect("/management");
+    case "administer":
+      return redirect("/admin");
+    default:
+      return redirect("/error");
   }
 }
 
-export async function auth() {
-  const supabase = await createClient()
+export async function checkStatus(requiredStatus: Database["public"]["Enums"]["status"]) {
+  const status = await getUserStatus();
 
-  const {data, error} = await supabase.auth.getUser()
-  if (data.user && error) redirect('/error')
-  if (!data.user) redirect('/login')
-}
-
-export async function authAdmin() {
-  await auth();
-
-  if (!await isAdminUser()) {
-    redirect('/home')
+  switch (requiredStatus) {
+    case "student": {
+      if(status === null) redirect("/login");
+      break;
+    }
+    case "teacher": {
+      if(status === null) redirect("/login");
+      else if(status === "student") redirect("/home");
+      break;
+    }
+    case "administer": {
+      if(status === null) redirect("/login");
+      else if(status === "student") redirect("/home");
+      else if(status === "teacher") redirect("/management");
+      break;
+    }
   }
 }
