@@ -1,56 +1,71 @@
-import {addChatData, TypeChatData} from "@/app/(private)/chat/action";
-import {FormEventHandler, useRef} from "react";
+import {addMessage} from "@/app/(private)/chat/actions";
+import React, {useRef} from "react";
+import {Channel, ChatMessage, Profile} from "@/app/lib/supabase/type";
+import {User} from "@supabase/auth-js";
 
 function SendInput(
-  {roomId, from, to}: { roomId: string, from: string, to: string }
+  {channel, isStudent}: { channel: Channel, isStudent: boolean }
 ) {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const message = formData.get("message") as string;
+  const handleSend = () => {
+    const message = inputRef.current?.value.trim();
 
-    console.log(message);
+    if (!message || message === "") return
 
-    addChatData(roomId, from, to, message).then();
+    addMessage(channel, isStudent, message).then();
 
     if (inputRef.current?.value) inputRef.current.value = "";
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+      handleSend()
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="flex">
-      <input ref={inputRef} type="text" name="message" className="flex-1"/>
-      <button className="rounded-r-lg px-4 bg-blue-500 text-white">Send</button>
-    </form>
+    <div className="flex rounded shadow">
+      <textarea
+        className="flex-1 rounded-l p-2 resize-none [field-sizing:content]"
+        ref={inputRef} onKeyDown={handleKeyDown}
+      />
+      <button className="rounded-r px-4 bg-blue-500 text-white" onClick={handleSend}>送信</button>
+    </div>
   )
 }
 
 export default function ChatDetail(
-  {myUserId, roomId, chatData}: { myUserId: string, roomId: string, chatData: TypeChatData[] }
+  {channel, profiles, messages, user}: {
+    channel?: Channel,
+    profiles: Map<string, Profile>,
+    messages: ChatMessage[],
+    user: User
+  }
 ) {
-  if (!roomId) return <></>
-
-  const toUserId = chatData[0].from === myUserId ? chatData[0].to : chatData[0].from;
+  if (!channel) return <></>
 
   return (
     <div className="h-full flex flex-col">
-      <p className="rounded p-2 mb-8 text-center shadow">Room ID : {roomId}</p>
+      <p className="rounded p-2 mb-8 text-center shadow">
+        {profiles.get(channel.student === user.id ? channel.teacher : channel.student)?.name}
+      </p>
 
       <div className="flex-1 flex flex-col gap-4">
-        {chatData.map(data => (
-          <div className={"flex " + (data.from === myUserId ? "justify-end" : "")} key={data.id}>
-            <p className={
-              "rounded-xl px-4 py-2.5 shadow " + (data.from === myUserId ? "bg-blue-500 text-white" : "")
-            }>{data.message}</p>
+        {messages.map(message => (
+          <div className={"flex " + (message.from === user.id ? "justify-end" : "")} key={message.id}>
+            <pre className={
+              "rounded-xl px-4 py-2.5 shadow " + (message.from === user.id ? "bg-blue-500 text-white" : "")
+            }>
+              {message.text}
+            </pre>
           </div>
         ))}
       </div>
 
       <SendInput
-        from={myUserId}
-        to={toUserId}
-        roomId={roomId}
+        channel={channel}
+        isStudent={channel.student === user.id}
       />
     </div>
   )

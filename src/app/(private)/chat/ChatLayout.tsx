@@ -2,15 +2,27 @@
 
 import ChatList from "@/app/(private)/chat/ChatList";
 import {useEffect, useState} from "react";
-import {TypeChatData} from "@/app/(private)/chat/action";
 import ChatDetail from "@/app/(private)/chat/ChatDetail";
+import {Channel, ChannelWithLastMessage, ChatMessage, Profile} from "@/app/lib/supabase/type";
+import {User} from "@supabase/auth-js";
 import {createClient} from "@/app/utils/supabase/client";
 
 export default function ChatLayout(
-  {defaultChatData, myUserId}: { defaultChatData: TypeChatData[], myUserId: string }
+  {
+    defaultMessages,
+    defaultChannels,
+    defaultProfiles,
+    user
+  }: {
+    defaultMessages: ChatMessage[],
+    defaultChannels: ChannelWithLastMessage[]
+    defaultProfiles: Map<string, Profile>
+    user: User
+  }
 ) {
-  const [chatData, setChatData] = useState<TypeChatData[]>(defaultChatData);
-  const [selectedRoomId, setSelectedRoomId] = useState<string>("");
+  const [messages, setMessages] = useState<ChatMessage[]>(defaultMessages);
+  const [channels, setChannels] = useState<ChannelWithLastMessage[]>(defaultChannels);
+  const [selectedChannel, setSelectedChannel] = useState<Channel>();
 
   useEffect(() => {
     const supabase = createClient()
@@ -21,34 +33,47 @@ export default function ChatLayout(
         {
           event: "INSERT",
           schema: "public",
-          table: "chat",
+          table: "messages",
         },
         (payload) => {
-          setChatData([...chatData, payload.new as TypeChatData])
+          const newRecord = payload.new as ChatMessage;
+          setMessages(prevState => [...prevState, newRecord])
+          setChannels(prevState => prevState.map(value => {
+            if (value.id === newRecord.channel_id) value.lastMessage = newRecord;
+            return value
+          }))
         }
       )
       .subscribe()
 
     return () => {
-      supabase.removeChannel(channel).then();
-    }
-  }, [chatData]);
+      supabase.removeChannel(channel).then()
+    };
+  }, []);
 
-  const updateChatId = (id: string) => setSelectedRoomId(id);
+  const selectChannel = (channel: Channel) => {
+    setSelectedChannel(channel);
+  }
 
   return (
     <div className="flex h-full [&>*]:flex-1 [&>*]:p-8">
       <div>
-        <h1 className="text-xl">チャット</h1>
+        <h1 className="mb-4 text-xl">チャット</h1>
 
-        <ChatList chatData={chatData} updateChatId={updateChatId}/>
+        <ChatList
+          channels={channels}
+          profiles={defaultProfiles}
+          selectChannel={selectChannel}
+          user={user}
+        />
       </div>
 
       <div className="h-full border-l border-l-gray-200">
         <ChatDetail
-          myUserId={myUserId}
-          roomId={selectedRoomId}
-          chatData={chatData.filter(value => value.room_id === selectedRoomId)}
+          channel={selectedChannel}
+          profiles={defaultProfiles}
+          messages={messages.filter(value => value.channel_id === selectedChannel?.id)}
+          user={user}
         />
       </div>
     </div>
