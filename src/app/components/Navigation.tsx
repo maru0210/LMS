@@ -41,7 +41,7 @@ export function LogoutButton() {
 }
 
 export default function Navigation(
-  {autoPadding = true, children}: { autoPadding?: boolean, children?: ReactNode },
+  {padding = true, children}: { padding?: boolean, children?: ReactNode },
 ) {
   const pathname = usePathname()
 
@@ -84,7 +84,7 @@ export default function Navigation(
       </div>
 
       <div className="flex-1 overflow-auto">
-        <div className={"h-full " + (autoPadding ? "p-8" : "")}>
+        <div className={"h-full " + (padding ? "p-8" : "")}>
           {children}
         </div>
       </div>
