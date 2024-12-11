@@ -1,19 +1,20 @@
 import Navigation from "@/app/components/Navigation";
-import {checkStatus, logout} from "@/app/lib/supabase/auth";
-import {getAuthUser} from "@/app/lib/supabase/actions";
+import {checkStatus} from "@/app/lib/supabase/auth";
+import {getProfile, getUser} from "@/app/lib/supabase/actions";
 import ProfileForm from "@/app/(student)/profile/ProfileForm";
+import {Profile} from "@/app/lib/supabase/type";
 
-export default async function Profile() {
+export default async function ProfilePage() {
   await checkStatus("student")
 
-  const authUser = await getAuthUser()
-  console.log(authUser)
+  const user = await getUser()
+  const profile: Profile = await getProfile();
 
   return (
     <Navigation>
       <div className="flex flex-col">
         <h1 className="mb-4 text-lg">プロフィールの変更</h1>
-        <ProfileForm defaultAuthUser={authUser}/>
+        <ProfileForm defaultUser={user} defaultProfile={profile} />
       </div>
     </Navigation>
   )
