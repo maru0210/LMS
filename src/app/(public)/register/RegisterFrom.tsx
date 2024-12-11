@@ -1,9 +1,10 @@
 "use client"
 
 import {useActionState} from "react"
-import registerHandler from "@/app/(auth)/register/registerHandler";
-import AuthFormInput from "@/app/(auth)/components/AuthFormInput";
+import registerHandler from "@/app/(public)/register/registerHandler";
+import Input from "@/app/(public)/components/Input";
 import Link from "next/link";
+import LinkButton from "@/app/(public)/components/LinkButton";
 
 export default function RegisterForm() {
   const [state, formAction] = useActionState(registerHandler, null)
@@ -21,11 +22,13 @@ export default function RegisterForm() {
           </div>
         )}
 
-        <AuthFormInput label={"お名前（ニックネーム）"} id={"name"} autoComplete={"name"} />
+        <Input label={"学籍番号"} id={"student_id"} autoComplete={"off"} />
 
-        <AuthFormInput label={"メールアドレス"} id={"email"} autoComplete={"email"} />
+        <Input label={"お名前（ニックネーム）"} id={"name"} autoComplete={"name"}/>
 
-        <AuthFormInput label={"パスワード"} id={"password"} autoComplete={"current-password"} />
+        <Input label={"メールアドレス"} id={"email"} autoComplete={"email"}/>
+
+        <Input label={"パスワード"} id={"password"} autoComplete={"current-password"}/>
 
         <div>
           <button type="submit" className="block w-full rounded-lg py-2.5 bg-lime-300">登録</button>
@@ -35,10 +38,7 @@ export default function RegisterForm() {
 
         <div className="space-y-2">
           <p className="ml-0.5">すでに登録済みの方</p>
-          <Link
-            href="/login"
-            className="block w-full rounded-lg py-2.5 ring-0 bg-lime-600 text-white text-center"
-          >ログインページ</Link>
+          <LinkButton text={"ログインページ"} link={"/login"} className={"bg-lime-600 text-white"}/>
         </div>
       </form>
     </div>

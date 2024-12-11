@@ -8,7 +8,7 @@ type Props = {
   defaultValue?: string;
 }
 
-export default function AuthFormInput(
+export default function Input(
   {label, id, autoComplete, keepValue = true, defaultValue = ""} : Props,
 ) {
   const [state, setState] = useState(defaultValue)

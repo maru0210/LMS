@@ -15,7 +15,6 @@ export async function login(formData: FormData) {
   }
 
   const {error} = await supabase.auth.signInWithPassword(data)
-
   if (error) return error
 
   await checkSession()
@@ -31,13 +30,13 @@ export async function register(formData: FormData) {
     password: formData.get('password') as string,
     options: {
       data: {
+        student_id: formData.get('student_id') as string,
         name: formData.get('name') as string,
       }
     }
   }
 
   const {error} = await supabase.auth.signUp(data)
-
   if (error) return error
 
   await checkSession()

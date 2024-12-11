@@ -4,7 +4,7 @@ import {login} from "@/app/lib/supabase/auth";
 import getAuthErrorMessage from "@/app/lib/supabase/getAuthErrorMessage";
 
 export default async function loginHandler(
-  prevState: string | null, formData: FormData
+  _prevState: string | null, formData: FormData
 ) {
   const error = await login(formData)
 
