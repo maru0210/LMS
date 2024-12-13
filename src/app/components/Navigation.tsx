@@ -6,6 +6,7 @@ import {usePathname} from "next/navigation";
 import Link from "next/link";
 
 import {logout} from "@/app/lib/supabase/auth";
+import ToastProvider from "@/app/components/Toast";
 
 const defaultNavList = [
   {name: "ホーム", href: "/home", svg: "/home.svg", current: false},
@@ -59,35 +60,36 @@ export default function Navigation(
   }, [pathname])
 
   return (
-    <div className="flex h-screen">
-      <div className="w-52 shadow">
-        <div className="flex flex-col h-full p-3 pt-0 text-lg">
-          <p className="mx-2 my-8">学習管理システム</p>
+    <ToastProvider>
+      <div className="flex h-screen">
+        <div className="w-52 shadow">
+          <div className="flex flex-col h-full p-3 pt-0 text-lg">
+            <p className="mx-2 my-8">学習管理システム</p>
 
-          <ul className={
-            "flex flex-col gap-2 h-full text-gray-900" + (!isAdmin ? " [&>*:last-child]:mt-auto" : "")
-          }>
-            {navList.map((item, index) => {
-              return (
-                <li key={index}>
-                  <NavItem name={item.name} href={item.href} svg={item.svg} current={item.current}/>
-                </li>
-              )
-            })}
-          </ul>
+            <ul className={
+              "flex flex-col gap-2 h-full text-gray-900" + (!isAdmin ? " [&>*:last-child]:mt-auto" : "")
+            }>
+              {navList.map((item, index) => {
+                return (
+                  <li key={index}>
+                    <NavItem name={item.name} href={item.href} svg={item.svg} current={item.current}/>
+                  </li>
+                )
+              })}
+            </ul>
 
-          <hr className="my-2"/>
+            <hr className="my-2"/>
 
-          <LogoutButton/>
+            <LogoutButton/>
+          </div>
         </div>
 
-      </div>
-
-      <div className="flex-1 overflow-auto">
-        <div className={"h-full " + (padding ? "p-8" : "")}>
-          {children}
+        <div className="flex-1 overflow-auto">
+          <div className={"h-full " + (padding ? "p-8" : "")}>
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </ToastProvider>
   )
 }

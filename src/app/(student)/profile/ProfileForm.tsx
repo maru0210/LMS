@@ -1,10 +1,11 @@
 "use client"
 
-import {HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute, useState} from "react";
+import {HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute, useContext, useState} from "react";
 
 import {User} from "@supabase/auth-js";
 import {Profile} from "@/app/lib/supabase/type";
 import {changeEmail, changeName, changePassword} from "@/app/(student)/profile/actions";
+import {AddToastCtx} from "@/app/components/Toast";
 
 function Input(
   {label, id, type, placeholder, autoComplete, disabled = false}:
@@ -52,6 +53,8 @@ export default function ProfileForm(
   const [user] = useState<User>(defaultUser)
   const [profile, setProfile] = useState<Profile>(defaultProfile)
 
+  const addToast = useContext(AddToastCtx)
+
   function handleChangeName(formData: FormData) {
     if (!formData.get("name")) return;
 
@@ -61,7 +64,7 @@ export default function ProfileForm(
         .replace(/[ 　]+/g, ' ');
 
     if (name === "") {
-      console.log("正しい名前を入力してください。");
+      addToast("正しい名前を入力してください。")
       return;
     }
 
