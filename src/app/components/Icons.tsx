@@ -1,4 +1,4 @@
-export const SuccessSVG =  (
+export const SuccessSVG = (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
        className="size-5">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -6,7 +6,7 @@ export const SuccessSVG =  (
   </svg>
 )
 
-export const WarningSVG =  (
+export const WarningSVG = (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
        className="size-5">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -14,7 +14,7 @@ export const WarningSVG =  (
   </svg>
 )
 
-export const DangerSVG =  (
+export const DangerSVG = (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
        className="size-5">
     <path strokeLinecap="round" strokeLinejoin="round"

@@ -2,6 +2,7 @@
 
 import {Database} from "../../../../../database.types";
 import {createClient} from "@/app/utils/supabase/server";
+import {redirect} from "next/navigation";
 
 export type Exam = Database["public"]["Tables"]["exams"]["Row"]
 
@@ -31,6 +32,13 @@ export type NumberQ = {
 } & metaQ
 
 export type Question = TextQ | SelectQ | NumberQ
+
+export async function getExams() {
+  const supabase = await createClient()
+  const {data, error} = await supabase.from("exams").select()
+  if(error) redirect("/error");
+  return data
+}
 
 export async function getExam(id: string) {
   const supabase = await createClient();

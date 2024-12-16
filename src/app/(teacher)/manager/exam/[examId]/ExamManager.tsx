@@ -5,6 +5,7 @@ import React, {HTMLInputTypeAttribute, useContext, useState} from "react";
 import {Exam, ExamData, Question, saveExam, TextQ} from "@/app/(teacher)/manager/exam/actions";
 import {AddToastCtx} from "@/app/components/Toast";
 import convertJson from "@/app/(teacher)/manager/exam/libs/convertJson";
+import Image from "next/image";
 
 
 function Input(
@@ -47,7 +48,7 @@ function Button(
 ) {
   return (
     <button
-      form={form} onClick={onClick} type="button"
+      form={form} onClick={onClick}
       className="rounded-lg px-3 py-1.5 bg-blue-600 text-white hover:bg-blue-700 transition"
     >{text}</button>
   )
@@ -60,13 +61,6 @@ export default function ExamManager(
 
   // const [exam, setExam] = useState<Exam>(defaultExam)
   const [questions, setQuestions] = useState<Question[]>((defaultExam.data as ExamData).questions)
-
-  // function getQuestions(formData: FormData) {
-  //   const data = convertJson(formData);
-  //
-  //   if (data.error) addToast("danger", data.error)
-  //   else console.log(data)
-  // }
 
   function saveExamHandler(formData: FormData) {
     const data = convertJson(formData);
@@ -94,6 +88,10 @@ export default function ExamManager(
     }])
   }
 
+  function deleteQuestion(id: string) {
+    setQuestions(prevState => prevState.filter((value) => value.id !== id))
+  }
+
   return (
     <div className="flex flex-col gap-4 max-w-screen-sm mx-auto">
       <div className="flex justify-end">
@@ -109,15 +107,19 @@ export default function ExamManager(
               case "TEXT":
                 const q = question as TextQ;
                 return (
-                  <div className="flex flex-col gap-2" key={q.id}>
-                    <Input id={q.id + "-type"} type={"text"} label={"形式"} value={q.type}
-                           readonly={true}/>
-                    <div className="hidden">
-                      <Input id={q.id + "-id"} type={"text"} label={"ID"} value={q.id}/>
+                  <div className="flex gap-4" key={q.id}>
+                    <div className="flex-1 flex flex-col gap-2">
+                      <Input id={q.id + "-type"} type={"text"} label={"形式"} value={q.type}
+                             readonly={true}/>
+                      <div className="hidden">
+                        <Input id={q.id + "-id"} type={"text"} label={"ID"} value={q.id}/>
+                      </div>
+                      <Input id={q.id + "-point"} type={"number"} label={"配点"} value={q.point}/>
+                      <TextArea id={q.id + "-statement"} label={"問題文"} value={q.statement}/>
+                      <Input id={q.id + "-answer"} type={"text"} label={"解答"} value={q.answer}/>
                     </div>
-                    <Input id={q.id + "-point"} type={"number"} label={"配点"} value={q.point}/>
-                    <TextArea id={q.id + "-statement"} label={"問題文"} value={q.statement}/>
-                    <Input id={q.id + "-answer"} type={"text"} label={"解答"} value={q.answer}/>
+                    <Image src={"/xmark.svg"} alt={"削除"} onClick={() => deleteQuestion(q.id)}
+                           width={24} height={24}/>
                   </div>
                 )
               default:

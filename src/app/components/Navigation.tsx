@@ -10,11 +10,12 @@ import ToastProvider from "@/app/components/Toast";
 
 const defaultNavList = [
   {name: "ホーム", href: "/home", svg: "/home.svg", current: false},
+  {name: "試験", href: "/exam", svg: "/pencil.svg", current: false},
   {name: "プロフィール", href: "/profile", svg: "/user.svg", current: false}
 ]
 
 const defaultAdmNavList = [
-  {name: "コンテンツ", href: "/admin", svg: "/gear.svg", current: false},
+  {name: "試験管理", href: "/manager/exam", svg: "/pencil.svg", current: false},
 ]
 
 export const NavItem = (

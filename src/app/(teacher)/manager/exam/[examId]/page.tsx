@@ -19,7 +19,7 @@ export default async function ExamDetailPage(
 
   return (
     <Navigation>
-      <p>Exam Id: {examId}</p>
+      <p className="mb-4 text-lg">{exam[0].name} (ID: {exam[0].id})</p>
       <div>
         <ExamManager defaultExam={exam[0]} />
       </div>
