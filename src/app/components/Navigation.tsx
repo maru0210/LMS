@@ -46,7 +46,7 @@ export default function Navigation(
 ) {
   const pathname = usePathname()
 
-  const isAdmin = pathname.split("/").at(1) === "admin"
+  const isAdmin = pathname.split("/").at(1) === "manager"
 
   const [navList, setNavList] = useState(isAdmin ? defaultAdmNavList : defaultNavList);
 

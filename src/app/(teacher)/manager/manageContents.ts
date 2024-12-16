@@ -2,7 +2,7 @@
 
 import {createClient} from "@/app/utils/supabase/server";
 import {getContents} from "@/app/lib/microCMS/microcms";
-import {TableContent} from "@/app/(admin)/admin/ContentsManager";
+import {TableContent} from "@/app/(teacher)/teacher/ContentsManager";
 
 export async function getDbContents() {
   const supabase = await createClient()

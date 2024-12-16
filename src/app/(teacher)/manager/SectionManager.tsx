@@ -1,7 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
-import {Chapter, getCmsChapter, getDbChapters, reflectionDbChapters} from "@/app/(admin)/admin/manageChapters";
+import {Chapter, getCmsChapter, getDbChapters, reflectionDbChapters} from "@/app/(teacher)/teacher/manageChapters";
 
 export default function SectionManager() {
   const [dbChapters, setDbChapters] = useState<Chapter[]>([]);

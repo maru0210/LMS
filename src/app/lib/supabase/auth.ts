@@ -78,9 +78,9 @@ export async function checkSession() {
     case "student":
       return redirect("/home");
     case "teacher":
-      return redirect("/management");
-    case "administer":
-      return redirect("/admin");
+      return redirect("/manager/exam");
+    // case "administer":
+    //   return redirect("/admin");
     default:
       return redirect("/error");
   }
@@ -99,11 +99,11 @@ export async function checkStatus(requiredStatus: Database["public"]["Enums"]["s
       else if(status === "student") redirect("/home");
       break;
     }
-    case "administer": {
-      if(status === null) redirect("/login");
-      else if(status === "student") redirect("/home");
-      else if(status === "teacher") redirect("/management");
-      break;
-    }
+    // case "administer": {
+    //   if(status === null) redirect("/login");
+    //   else if(status === "student") redirect("/home");
+    //   else if(status === "teacher") redirect("/management");
+    //   break;
+    // }
   }
 }

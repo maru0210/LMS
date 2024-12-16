@@ -26,13 +26,8 @@ export function Input(
 
         <div className={"flex-1 max-w-96 flex gap-2 text-sm"}>
           <input
-            id={id}
-            name={id}
-            type={type}
-            placeholder={placeholder}
-            autoComplete={autoComplete}
-            required={true}
-            disabled={disabled}
+            id={id} name={id} type={type} placeholder={placeholder}
+            autoComplete={autoComplete} required={true} disabled={disabled}
             className="flex-1 block rounded-lg h-8 px-2 ring-1 ring-inset ring-gray-300 shadow-sm focus:shadow-md transition
                        disabled:bg-white disabled:placeholder:text-neutral-900 disabled:ring-0 disabled:shadow-none"
           />

@@ -1,7 +1,7 @@
 "use client"
 
 import {useState} from "react";
-import {deleteDbContents, getDbContents, insertDbContents} from "@/app/(admin)/admin/manageContents";
+import {deleteDbContents, getDbContents, insertDbContents} from "@/app/(teacher)/teacher/manageContents";
 
 export type TableContent = {
   id: string
