@@ -19,3 +19,26 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+input, textarea, select {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: lightgray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: gray;
+}
+
+
