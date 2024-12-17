@@ -16,6 +16,7 @@ const defaultNavList = [
 
 const defaultAdmNavList = [
   {name: "試験管理", href: "/manager/exam", svg: "/pencil.svg", current: false},
+  {name: "成績", href: "/manager/grade", svg: "/grade.svg", current: false},
 ]
 
 export const NavItem = (
@@ -86,7 +87,7 @@ export default function Navigation(
         </div>
 
         <div className="flex-1 overflow-auto">
-          <div className={"h-full " + (padding ? "p-8" : "")}>
+          <div className={"min-h-full " + (padding ? "p-8" : "")}>
             {children}
           </div>
         </div>

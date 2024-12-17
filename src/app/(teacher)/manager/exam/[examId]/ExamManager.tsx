@@ -6,6 +6,7 @@ import {Exam, ExamData, Question, saveExam, TextQ} from "@/app/(teacher)/manager
 import {AddToastCtx} from "@/app/components/Toast";
 import convertJson from "@/app/(teacher)/manager/exam/libs/convertJson";
 import Image from "next/image";
+import {XMarkSVG} from "@/app/components/Icons";
 
 
 function Input(
@@ -107,7 +108,7 @@ export default function ExamManager(
               case "TEXT":
                 const q = question as TextQ;
                 return (
-                  <div className="flex gap-4" key={q.id}>
+                  <div className="flex items-center gap-4" key={q.id}>
                     <div className="flex-1 flex flex-col gap-2">
                       <Input id={q.id + "-type"} type={"text"} label={"形式"} value={q.type}
                              readonly={true}/>
@@ -118,8 +119,12 @@ export default function ExamManager(
                       <TextArea id={q.id + "-statement"} label={"問題文"} value={q.statement}/>
                       <Input id={q.id + "-answer"} type={"text"} label={"解答"} value={q.answer}/>
                     </div>
-                    <Image src={"/xmark.svg"} alt={"削除"} onClick={() => deleteQuestion(q.id)}
-                           width={24} height={24}/>
+                    <div>
+                      <button type={"button"} onClick={() => deleteQuestion(q.id)}>
+                        <Image src={"/xmark.svg"} alt={"削除"} width={24} height={24}
+                               className="hover:"/>
+                      </button>
+                    </div>
                   </div>
                 )
               default:

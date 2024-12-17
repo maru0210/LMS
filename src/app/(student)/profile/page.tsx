@@ -1,6 +1,6 @@
 import Navigation from "@/app/components/Navigation";
 import {checkStatus} from "@/app/lib/supabase/auth";
-import {getProfile, getUser} from "@/app/lib/supabase/actions";
+import {getUserProfile, getUser} from "@/app/lib/supabase/actions";
 import ProfileForm from "@/app/(student)/profile/ProfileForm";
 import {Profile} from "@/app/lib/supabase/type";
 
@@ -8,7 +8,7 @@ export default async function ProfilePage() {
   await checkStatus("student")
 
   const user = await getUser()
-  const profile: Profile = await getProfile();
+  const profile: Profile = await getUserProfile();
 
   return (
     <Navigation>
