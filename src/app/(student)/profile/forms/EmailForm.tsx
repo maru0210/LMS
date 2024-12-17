@@ -9,7 +9,7 @@ export default function EmailForm(
 ) {
   const addToast = useContext(AddToastCtx)
   
-  const [email] = useState<string>(defaultEmail);
+  const [email, setEmail] = useState<string>(defaultEmail);
   const [newEmail, setNewEmail] = useState<string | null>(null);
   
   useEffect(() => {
@@ -19,7 +19,8 @@ export default function EmailForm(
       if(res) {
         addToast("danger", res);
       } else {
-        addToast("success", `メールアドレス変更の確認メールを ${newEmail} に送信しました。メール内リンクより変更を確定してください。`);
+        setEmail(newEmail);
+        addToast("success", `メールアドレスを \'${newEmail}\' に変更しました。`);
       }
     }).catch(() => {
       addToast("danger", "予期せぬエラーが発生しました。")

@@ -1,5 +1,10 @@
 import LoginForm from "@/app/(public)/login/LoginForm";
 import {checkSession} from "@/app/lib/supabase/auth";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "ログイン｜手軽にアルゴル"
+}
 
 export default async function LoginPage() {
   await checkSession()

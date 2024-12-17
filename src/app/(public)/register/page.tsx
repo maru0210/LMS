@@ -1,5 +1,10 @@
 import RegisterForm from "@/app/(public)/register/RegisterFrom";
 import {checkSession} from "@/app/lib/supabase/auth";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "新規登録｜手軽にアルゴル"
+}
 
 export default async function RegisterPage() {
   await checkSession()
