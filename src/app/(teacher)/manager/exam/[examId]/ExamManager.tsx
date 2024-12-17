@@ -6,7 +6,6 @@ import {Exam, ExamData, Question, saveExam, TextQ} from "@/app/(teacher)/manager
 import {AddToastCtx} from "@/app/components/Toast";
 import convertJson from "@/app/(teacher)/manager/exam/libs/convertJson";
 import Image from "next/image";
-import {XMarkSVG} from "@/app/components/Icons";
 
 
 function Input(
