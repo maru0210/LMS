@@ -44,11 +44,9 @@ export function LogoutButton() {
 }
 
 export default function Navigation(
-  {padding = true, children}: { padding?: boolean, children?: ReactNode },
+  {isAdmin = false, padding = true, children}: { isAdmin?: boolean, padding?: boolean, children?: ReactNode },
 ) {
   const pathname = usePathname()
-
-  const isAdmin = pathname.split("/").at(1) === "manager"
 
   const [navList, setNavList] = useState(isAdmin ? defaultAdmNavList : defaultNavList);
 
