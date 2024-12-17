@@ -1,18 +1,18 @@
 import Navigation from "@/app/components/Navigation";
 import ChapterCard from "@/app/(student)/home/ChapterCard";
-import {createClient} from "@/app/utils/supabase/server";
 import {checkStatus} from "@/app/lib/supabase/auth";
+import {Metadata} from "next";
+import {getChapters, getContents} from "@/app/lib/microCMS/microcms";
+
+export const metadata: Metadata = {
+  title: "コンテンツ一覧｜手軽にアルゴル"
+}
 
 export default async function Home() {
   await checkStatus("student");
 
-  const supabase = await createClient()
-
-  const {data: contents} = await supabase.from("contents").select().order("chapter")
-
-  const chapters = Array.from(
-    new Map(contents?.map((content) => [content.chapter, content.chapter_id])).values()
-  );
+  const {contents: chapters} = await getChapters();
+  const {contents: contents} = await getContents({orders: "section"});
 
   return (
     <Navigation>
@@ -28,7 +28,11 @@ export default async function Home() {
 
         <div className="flex flex-wrap gap-8">
           {chapters.map(chapter => (
-            <ChapterCard chapterId={chapter} key={chapter}/>
+            <ChapterCard
+              contents={
+                contents.filter(value => value.chapter.id === chapter.id)
+              }
+              key={chapter.id}/>
           ))}
         </div>
       </div>

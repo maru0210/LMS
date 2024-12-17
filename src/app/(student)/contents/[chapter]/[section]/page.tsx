@@ -3,22 +3,20 @@ import {createClient} from "@/app/utils/supabase/server";
 import Navigation from "@/app/components/Navigation";
 import {checkStatus} from "@/app/lib/supabase/auth";
 import {getDetail} from "@/app/lib/microCMS/microcms";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "記事詳細ページ｜手軽にアルゴル"
+}
 
 export default async function DetailPage(
-  props: { params: Promise<{ chapter: string, section: string }> }
+  {params}: { params: Promise<{ chapter: string, section: string }> }
 ) {
   await checkStatus("student");
 
-  const {chapter, section} = await props.params;
-
-  const supabase = await createClient()
-  const {data} = await supabase.from("contents").select().eq("id", section);
-  // 未登録のコンテンツはnotFound
-  if(!data || !data?.length) notFound()
+  const {section} = await params;
 
   const post = await getDetail(section);
-  // チャプターのidが違ったらnotFound
-  if(post.chapter.id !== chapter) notFound()
 
   return (
     <Navigation>
@@ -31,20 +29,6 @@ export default async function DetailPage(
           dangerouslySetInnerHTML={{__html: post.content}}
           className="flex flex-col gap-4 [&>*:first-child]:m-0 [&>:is(h1,h2,h3)]:mt-4 [&>h1]:text-xl [&>h1]:font-bold"
         />
-
-        <div className="border-b-4 border-lime-200 border-dashed" />
-
-        <div className="p-4 shadow">
-          <h1 className="mb-4 border-b-2 pb-1 border-gray-200 text-xl">確認テスト</h1>
-          <div>
-            {post.questions && post.questions.map((question, i) => (
-              <div key={i}>
-                <p><span className="pr-0.5">問</span>{i+1}</p>
-                <p>{question.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </Navigation>
   )
