@@ -30,10 +30,6 @@ export default async function Home() {
           {chapters.map(chapter => (
             <ChapterCard chapterId={chapter} key={chapter}/>
           ))}
-
-          {chapters.map(chapter => (
-            <ChapterCard chapterId={chapter} key={chapter}/>
-          ))}
         </div>
       </div>
     </Navigation>
