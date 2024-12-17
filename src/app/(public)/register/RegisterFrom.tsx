@@ -3,7 +3,6 @@
 import {useActionState} from "react"
 import registerHandler from "@/app/(public)/register/registerHandler";
 import Input from "@/app/(public)/components/Input";
-import Link from "next/link";
 import LinkButton from "@/app/(public)/components/LinkButton";
 
 export default function RegisterForm() {

@@ -1,7 +1,6 @@
 "use client"
 
 import {useActionState} from "react"
-import Link from "next/link";
 import loginHandler from "@/app/(public)/login/loginHandler";
 import Input from "@/app/(public)/components/Input";
 import Button from "@/app/(public)/components/Button";
