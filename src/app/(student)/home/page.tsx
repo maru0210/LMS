@@ -5,7 +5,7 @@ import {Metadata} from "next";
 import {getChapters, getContents} from "@/app/lib/microCMS/microcms";
 
 export const metadata: Metadata = {
-  title: "コンテンツ一覧｜手軽にアルゴル"
+  title: "学習コンテンツ"
 }
 
 export default async function Home() {

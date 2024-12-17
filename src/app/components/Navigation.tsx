@@ -17,6 +17,7 @@ const defaultNavList = [
 const defaultAdmNavList = [
   {name: "試験管理", href: "/manager/exam", svg: "/pencil.svg", current: false},
   {name: "成績", href: "/manager/grade", svg: "/grade.svg", current: false},
+  {name: "プロフィール", href: "/profile", svg: "/user.svg", current: false}
 ]
 
 export const NavItem = (
@@ -66,9 +67,7 @@ export default function Navigation(
           <div className="flex flex-col h-full p-3 pt-0 text-lg">
             <p className="mx-2 my-8">学習管理システム</p>
 
-            <ul className={
-              "flex flex-col gap-2 h-full text-gray-900" + (!isAdmin ? " [&>*:last-child]:mt-auto" : "")
-            }>
+            <ul className="flex flex-col gap-2 h-full text-gray-900 [&>*:last-child]:mt-auto">
               {navList.map((item, index) => {
                 return (
                   <li key={index}>

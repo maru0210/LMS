@@ -1,12 +1,18 @@
-import {notFound} from "next/navigation";
-import {createClient} from "@/app/utils/supabase/server";
 import Navigation from "@/app/components/Navigation";
 import {checkStatus} from "@/app/lib/supabase/auth";
 import {getDetail} from "@/app/lib/microCMS/microcms";
 import {Metadata} from "next";
 
-export const metadata: Metadata = {
-  title: "記事詳細ページ｜手軽にアルゴル"
+export async function generateMetadata(
+  {params}: {params: Promise<{chapter: string, section: string}> }
+): Promise<Metadata> {
+  const {section} = await params
+  const post = await getDetail(section, {fields: "title"})
+  console.log(post)
+
+  return {
+    title: post.title,
+  }
 }
 
 export default async function DetailPage(
@@ -15,7 +21,6 @@ export default async function DetailPage(
   await checkStatus("student");
 
   const {section} = await params;
-
   const post = await getDetail(section);
 
   return (

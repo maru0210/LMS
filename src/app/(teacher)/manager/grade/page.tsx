@@ -23,7 +23,7 @@ export default async function Grade() {
   }
 
   return (
-    <Navigation>
+    <Navigation isAdmin={true}>
       <h1 className="mb-4 text-xl">成績</h1>
       <div>
         {examFinLog.map(value => (

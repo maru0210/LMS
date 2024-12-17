@@ -2,6 +2,11 @@ import Navigation from "@/app/components/Navigation";
 import {checkStatus} from "@/app/lib/supabase/auth";
 import {getExams} from "@/app/(teacher)/manager/exam/actions";
 import Link from "next/link";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "試験管理"
+}
 
 export default async function ExamPage() {
   await checkStatus("teacher");
@@ -9,7 +14,7 @@ export default async function ExamPage() {
   const exams = await getExams()
 
   return (
-    <Navigation>
+    <Navigation isAdmin={true}>
       <h1 className="mb-4 text-xl">試験一覧</h1>
       <div className="flex flex-col gap-4 mx-4">
         {exams.map(exam => (

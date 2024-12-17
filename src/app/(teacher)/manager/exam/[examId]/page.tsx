@@ -1,7 +1,19 @@
 import {checkStatus} from "@/app/lib/supabase/auth";
 import ExamManager from "@/app/(teacher)/manager/exam/[examId]/ExamManager";
 import Navigation from "@/app/components/Navigation";
-import {getExam} from "@/app/(teacher)/manager/exam/actions";
+import {Metadata} from "next";
+import {getExam} from "@/app/(student)/exam/actions";
+
+export async function generateMetadata(
+  {params}: { params: Promise<{ examId: string }> }
+): Promise<Metadata> {
+  const {examId} = await params
+  const exam = await getExam(examId);
+
+  return {
+    title: "試験管理‐" + exam.name,
+  }
+}
 
 export default async function ExamDetailPage(
   {params}: { params: Promise<{ examId: string }> }
@@ -13,15 +25,11 @@ export default async function ExamDetailPage(
   const exam =  await getExam(examId);
   console.log(exam);
 
-  if(!exam || exam.length !== 1) {
-    return <p>エラー</p>;
-  }
-
   return (
-    <Navigation>
-      <p className="mb-4 text-lg">{exam[0].name} (ID: {exam[0].id})</p>
+    <Navigation isAdmin={true}>
+      <p className="mb-4 text-lg">{exam.name} (ID: {exam.id})</p>
       <div>
-        <ExamManager defaultExam={exam[0]} />
+        <ExamManager defaultExam={exam} />
       </div>
     </Navigation>
   )

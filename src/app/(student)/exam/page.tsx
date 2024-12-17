@@ -2,6 +2,11 @@ import Navigation from "@/app/components/Navigation";
 import {checkStatus} from "@/app/lib/supabase/auth";
 import {getExams} from "@/app/(student)/exam/actions";
 import ExamClient from "@/app/(student)/exam/pageClient";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+  title: "試験一覧"
+}
 
 export default async function Exam() {
   await checkStatus("student")
