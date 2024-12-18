@@ -1,14 +1,11 @@
 import RegisterForm from "@/app/(auth)/register/RegisterFrom";
-import {checkSession} from "@/lib/supabase/auth";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-  title: "新規登録｜手軽にアルゴル"
+  title: "新規登録"
 }
 
-export default async function RegisterPage() {
-  await checkSession()
-
+export default async function Page() {
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <div className="md:flex-1 xl:flex-[2] pt-8 md:p-0">

@@ -6,9 +6,7 @@ export const metadata: Metadata = {
   title: "ログイン｜手軽にアルゴル"
 }
 
-export default async function LoginPage() {
-  await checkSession()
-
+export default function Page() {
   return (
     <div className="flex flex-col md:flex-row h-screen">
       <div className="md:flex-1 xl:flex-[2] pt-8 md:p-0">
