@@ -3,7 +3,7 @@
 import React, {HTMLInputTypeAttribute, useContext, useState} from "react";
 
 import {Exam, ExamData, Question, saveExam, TextQ} from "@/app/(teacher)/manager/exam/actions";
-import {AddToastCtx} from "@/app/components/Toast";
+import {AddToastCtx} from "@/components/Toast";
 import convertJson from "@/app/(teacher)/manager/exam/libs/convertJson";
 import Image from "next/image";
 

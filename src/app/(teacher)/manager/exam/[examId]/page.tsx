@@ -1,6 +1,6 @@
 import {checkStatus} from "@/lib/supabase/auth";
 import ExamManager from "@/app/(teacher)/manager/exam/[examId]/ExamManager";
-import Navigation from "@/app/components/Navigation";
+import Navigation from "@/components/Navigation";
 import {Metadata} from "next";
 import {getExam} from "@/app/(student)/exam/actions";
 

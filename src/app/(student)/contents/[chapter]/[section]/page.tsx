@@ -1,4 +1,4 @@
-import Navigation from "@/app/components/Navigation";
+import Navigation from "@/components/Navigation";
 import {checkStatus} from "@/lib/supabase/auth";
 import {getDetail} from "@/lib/microCMS/microcms";
 import {Metadata} from "next";

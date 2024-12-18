@@ -1,6 +1,6 @@
 import {getExam} from "@/app/(student)/exam/actions";
 import {getExamLog} from "@/app/(teacher)/manager/grade/actions";
-import Navigation from "@/app/components/Navigation";
+import Navigation from "@/components/Navigation";
 import {checkStatus} from "@/lib/supabase/auth";
 import {getProfile} from "@/lib/supabase/profile";
 

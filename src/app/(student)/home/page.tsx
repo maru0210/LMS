@@ -1,4 +1,4 @@
-import Navigation from "@/app/components/Navigation";
+import Navigation from "@/components/Navigation";
 import ChapterCard from "@/app/(student)/home/ChapterCard";
 import {checkStatus} from "@/lib/supabase/auth";
 import {Metadata} from "next";

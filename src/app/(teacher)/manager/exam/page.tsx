@@ -1,4 +1,4 @@
-import Navigation from "@/app/components/Navigation";
+import Navigation from "@/components/Navigation";
 import {checkStatus} from "@/lib/supabase/auth";
 import {getExams} from "@/app/(teacher)/manager/exam/actions";
 import Link from "next/link";
