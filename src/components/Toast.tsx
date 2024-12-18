@@ -20,8 +20,7 @@ type Toast = {
 }
 
 export const AddToastCtx
-  = createContext<(type: ToastType, text: string) => void>(() => {
-})
+  = createContext<(type: ToastType, text: string) => void>(() => 0)
 
 export function useToast(): [typeof toasts, { addToast: typeof addToast }] {
   const [toasts, setToasts] = useState<Toast[]>([]);
