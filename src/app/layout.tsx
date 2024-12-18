@@ -24,7 +24,7 @@ const LINESeedJP = localFont({
 })
 
 export default function RootLayout(
-  {children,}: Readonly<{ children: React.ReactNode; }>
+  {children}: Readonly<{ children: React.ReactNode; }>
 ) {
   return (
     <html lang="ja">
