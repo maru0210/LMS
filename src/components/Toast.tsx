@@ -1,7 +1,7 @@
 "use client"
 
 import {createContext, ReactNode, useCallback, useState} from "react";
-import {DangerSVG, InfoSVG, SuccessSVG, WarningSVG} from "@/app/components/Icons";
+import {DangerSVG, InfoSVG, SuccessSVG, WarningSVG} from "@/components/Icons";
 
 type ToastType = "success" | "warning" | "danger" | "info";
 
