@@ -1,5 +1,5 @@
-import ProfileForm from "@/app/(student)/profile/ProfileForm";
-import Navigation from "@/app/components/Navigation";
+import ProfileForm from "@/app/(common)/profile/ProfileForm";
+import Navigation from "@/components/Navigation";
 import {checkStatus} from "@/lib/supabase/auth";
 import {getProfile} from "@/lib/supabase/profile";
 import {getCurrentUser} from "@/lib/supabase/user";

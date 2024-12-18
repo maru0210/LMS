@@ -1,8 +1,8 @@
 import {useContext, useEffect, useState} from "react";
 
-import {Input} from "@/app/(student)/profile/ProfileForm";
-import {changeEmail} from "@/app/(student)/profile/actions";
-import {AddToastCtx} from "@/app/components/Toast";
+import {Input} from "@/app/(common)/profile/ProfileForm";
+import {changeEmail} from "@/app/(common)/profile/actions";
+import {AddToastCtx} from "@/components/Toast";
 
 export default function EmailForm(
   {defaultEmail}: {defaultEmail: string}

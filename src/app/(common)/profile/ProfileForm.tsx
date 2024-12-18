@@ -4,9 +4,9 @@ import {HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute, useState} from "
 
 import {User} from "@supabase/auth-js";
 import {Profile} from "@/lib/supabase/type";
-import NameForm from "@/app/(student)/profile/forms/NameForm";
-import EmailForm from "@/app/(student)/profile/forms/EmailForm";
-import PasswordForm from "@/app/(student)/profile/forms/PasswordForm";
+import NameForm from "@/app/(common)/profile/forms/NameForm";
+import EmailForm from "@/app/(common)/profile/forms/EmailForm";
+import PasswordForm from "@/app/(common)/profile/forms/PasswordForm";
 
 export function Input(
   {label, id, type, placeholder, autoComplete, disabled = false}:

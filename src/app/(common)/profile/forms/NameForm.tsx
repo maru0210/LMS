@@ -1,8 +1,8 @@
 import {useContext, useEffect, useState} from "react";
 
-import {Input} from "@/app/(student)/profile/ProfileForm";
-import {changeName} from "@/app/(student)/profile/actions";
-import {AddToastCtx} from "@/app/components/Toast";
+import {Input} from "@/app/(common)/profile/ProfileForm";
+import {changeName} from "@/app/(common)/profile/actions";
+import {AddToastCtx} from "@/components/Toast";
 
 export default function NameForm(
   {defaultName}: {defaultName: string}
