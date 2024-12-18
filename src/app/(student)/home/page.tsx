@@ -1,8 +1,8 @@
 import Navigation from "@/app/components/Navigation";
 import ChapterCard from "@/app/(student)/home/ChapterCard";
-import {checkStatus} from "@/app/lib/supabase/auth";
+import {checkStatus} from "@/lib/supabase/auth";
 import {Metadata} from "next";
-import {getChapters, getContents} from "@/app/lib/microCMS/microcms";
+import {getChapters, getContents} from "@/lib/microCMS/microcms";
 
 export const metadata: Metadata = {
   title: "学習コンテンツ"

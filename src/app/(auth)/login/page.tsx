@@ -1,12 +1,12 @@
-import RegisterForm from "@/app/(public)/register/RegisterFrom";
-import {checkSession} from "@/app/lib/supabase/auth";
+import LoginForm from "@/app/(auth)/login/LoginForm";
+import {checkSession} from "@/lib/supabase/auth";
 import {Metadata} from "next";
 
 export const metadata: Metadata = {
-  title: "新規登録｜手軽にアルゴル"
+  title: "ログイン｜手軽にアルゴル"
 }
 
-export default async function RegisterPage() {
+export default async function LoginPage() {
   await checkSession()
 
   return (
@@ -23,7 +23,7 @@ export default async function RegisterPage() {
       <div className="md:flex-1">
         <div className="size-full md:p-16 md:pl-0">
           <div className="size-full rounded-2xl md:shadow-2xl overflow-auto">
-            <RegisterForm/>
+            <LoginForm/>
           </div>
         </div>
       </div>

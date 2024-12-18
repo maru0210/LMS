@@ -1,5 +1,4 @@
-import type {MicroCMSDate, MicroCMSQueries,} from "microcms-js-sdk";
-import {createClient} from "microcms-js-sdk";
+import {createClient, MicroCMSDate, MicroCMSQueries,} from "microcms-js-sdk";
 
 // コンテンツの型定義
 export type Content = {

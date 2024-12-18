@@ -1,15 +1,11 @@
-"use server"
-
-import {createClient} from "@/app/utils/supabase/server";
-import {getUser} from "@/app/lib/supabase/actions";
-import getErrorMessage from "@/app/lib/supabase/getErrorMessage";
+import getErrorMessage from "@/lib/supabase/getErrorMessage";
+import {getCurrentUser} from "@/lib/supabase/user";
+import {createClient} from "@/utils/supabase/server";
 
 export async function changeName(name: string) {
   const supabase = await createClient()
-  const user = await getUser()
-
-  const res
-    = await supabase.from("profiles").update({name: name}).eq("id", user.id)
+  const user = await getCurrentUser()
+  const res = await supabase.from("profiles").update({name: name}).eq("id", user.id)
 
   return getErrorMessage(res.error);
 }

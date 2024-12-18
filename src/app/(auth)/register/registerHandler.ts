@@ -1,7 +1,7 @@
 "use server"
 
-import {register} from "@/app/lib/supabase/auth";
-import getErrorMessage from "@/app/lib/supabase/getErrorMessage";
+import {register} from "@/app/(auth)/actions";
+import getErrorMessage from "@/lib/supabase/getErrorMessage";
 
 export default async function registerHandler(
   prevState: string | null, formData: FormData

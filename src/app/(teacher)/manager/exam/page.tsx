@@ -1,5 +1,5 @@
 import Navigation from "@/app/components/Navigation";
-import {checkStatus} from "@/app/lib/supabase/auth";
+import {checkStatus} from "@/lib/supabase/auth";
 import {getExams} from "@/app/(teacher)/manager/exam/actions";
 import Link from "next/link";
 import {Metadata} from "next";

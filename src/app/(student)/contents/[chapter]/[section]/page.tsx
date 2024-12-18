@@ -1,6 +1,6 @@
 import Navigation from "@/app/components/Navigation";
-import {checkStatus} from "@/app/lib/supabase/auth";
-import {getDetail} from "@/app/lib/microCMS/microcms";
+import {checkStatus} from "@/lib/supabase/auth";
+import {getDetail} from "@/lib/microCMS/microcms";
 import {Metadata} from "next";
 
 export async function generateMetadata(

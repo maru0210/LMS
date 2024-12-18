@@ -1,10 +1,10 @@
 "use client"
 
+import Button from "@/app/(auth)/components/Button";
+import Input from "@/app/(auth)/components/Input";
+import LinkButton from "@/app/(auth)/components/LinkButton";
+import loginHandler from "@/app/(auth)/login/loginHandler";
 import {useActionState} from "react"
-import loginHandler from "@/app/(public)/login/loginHandler";
-import Input from "@/app/(public)/components/Input";
-import Button from "@/app/(public)/components/Button";
-import LinkButton from "@/app/(public)/components/LinkButton";
 
 export default function LoginForm() {
   const [state, dispatch, isPending] = useActionState(loginHandler, null)

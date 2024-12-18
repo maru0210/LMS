@@ -2,7 +2,7 @@ import {AuthError} from "@supabase/auth-js";
 import {PostgrestError} from "@supabase/supabase-js";
 
 export default function getErrorMessage(error?: AuthError | PostgrestError | null) {
-  if(!error) return null;
+  if (!error) return null;
 
   switch (error.code) {
     case undefined:

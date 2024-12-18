@@ -1,12 +1,11 @@
 'use client'
 
-import {ReactNode, useEffect, useState} from "react";
-import Image from "next/image";
-import {usePathname} from "next/navigation";
-import Link from "next/link";
-
-import {logout} from "@/app/lib/supabase/auth";
+import {logout} from "@/app/(auth)/actions";
 import ToastProvider from "@/app/components/Toast";
+import Image from "next/image";
+import Link from "next/link";
+import {usePathname} from "next/navigation";
+import {ReactNode, useEffect, useState} from "react";
 
 const defaultNavList = [
   {name: "ホーム", href: "/home", svg: "/home.svg", current: false},

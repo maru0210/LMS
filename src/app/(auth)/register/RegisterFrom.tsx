@@ -1,9 +1,9 @@
 "use client"
 
 import {useActionState} from "react"
-import registerHandler from "@/app/(public)/register/registerHandler";
-import Input from "@/app/(public)/components/Input";
-import LinkButton from "@/app/(public)/components/LinkButton";
+import registerHandler from "@/app/(auth)/register/registerHandler";
+import Input from "@/app/(auth)/components/Input";
+import LinkButton from "@/app/(auth)/components/LinkButton";
 
 export default function RegisterForm() {
   const [state, formAction] = useActionState(registerHandler, null)

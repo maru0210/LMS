@@ -1,5 +1,5 @@
 import Link from "next/link";
-import {Content} from "@/app/lib/microCMS/microcms";
+import {Content} from "@/lib/microCMS/microcms";
 
 export default async function ChapterCard(
   {contents}: {contents: Content[]},

@@ -1,4 +1,4 @@
-import {checkStatus} from "@/app/lib/supabase/auth";
+import {checkStatus} from "@/lib/supabase/auth";
 import {getExam} from "@/app/(student)/exam/actions";
 import ExamDetailClient from "@/app/(student)/exam/[examId]/pageClient";
 import {Metadata} from "next";

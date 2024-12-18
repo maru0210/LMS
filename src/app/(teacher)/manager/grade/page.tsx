@@ -1,8 +1,8 @@
-import {checkStatus} from "@/app/lib/supabase/auth";
-import Navigation from "@/app/components/Navigation";
-import {getExamLog} from "@/app/(teacher)/manager/grade/actions";
-import {getProfile} from "@/app/lib/supabase/actions";
 import {getExam} from "@/app/(student)/exam/actions";
+import {getExamLog} from "@/app/(teacher)/manager/grade/actions";
+import Navigation from "@/app/components/Navigation";
+import {checkStatus} from "@/lib/supabase/auth";
+import {getProfile} from "@/lib/supabase/profile";
 
 export default async function Grade() {
   await checkStatus("teacher");

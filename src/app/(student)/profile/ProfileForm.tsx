@@ -3,7 +3,7 @@
 import {HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute, useState} from "react";
 
 import {User} from "@supabase/auth-js";
-import {Profile} from "@/app/lib/supabase/type";
+import {Profile} from "@/lib/supabase/type";
 import NameForm from "@/app/(student)/profile/forms/NameForm";
 import EmailForm from "@/app/(student)/profile/forms/EmailForm";
 import PasswordForm from "@/app/(student)/profile/forms/PasswordForm";
