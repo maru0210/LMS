@@ -1,22 +1,23 @@
 "use server"
 
-import {checkSession} from "@/lib/supabase/auth";
+import getErrorMessage from "@/lib/supabase/getErrorMessage";
 import {createClient} from "@/utils/supabase/server";
 import {redirect} from "next/navigation";
 
-export async function login(formData: FormData) {
+export async function login(_: string | null, formData: FormData) {
   const supabase = await createClient()
 
-  const {error} = await supabase.auth.signInWithPassword({
+  const data = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
-  })
-  if (error) return error
+  }
 
-  await checkSession()
+  const {error} = await supabase.auth.signInWithPassword(data)
+  if (error) return getErrorMessage(error)
+  return null
 }
 
-export async function register(formData: FormData) {
+export async function register(_: string | null, formData: FormData) {
   const supabase = await createClient()
 
   const data = {
@@ -31,17 +32,12 @@ export async function register(formData: FormData) {
   }
 
   const {error} = await supabase.auth.signUp(data)
-  if (error) return error
-
-  await checkSession()
+  if (error) return getErrorMessage(error)
+  return null
 }
 
 export async function logout() {
   const supabase = await createClient()
-
   const {error} = await supabase.auth.signOut({scope: "local"})
-
-  if (error) {
-    redirect('/error')
-  }
+  if (error) redirect('/error')
 }
