@@ -1,45 +1,39 @@
 "use client"
 
-import {useActionState} from "react"
-import registerHandler from "@/app/(auth)/register/registerHandler";
-import Input from "@/app/(auth)/components/Input";
-import LinkButton from "@/app/(auth)/components/LinkButton";
+import {register} from "@/app/(auth)/actions";
+import {FormInput} from "@/app/(auth)/components/FormInput";
+import {Button} from "@/components/parts/Button";
+import Link from "next/link";
+import {useActionState, useEffect} from "react"
 
 export default function RegisterForm() {
-  const [state, formAction] = useActionState(registerHandler, null)
+  const [state, handleSubmit, isPending] = useActionState(register, null)
+
+  useEffect(() => {
+    if (!isPending && state) {
+      console.log(state);
+    }
+  }, [state, isPending])
 
   return (
-    <div className="flex flex-col max-w-md h-full mx-auto px-8 text-gray-900">
-      <div className="flex-1 flex items-center justify-center">
-        <p className="py-12 text-2xl font-bold">新規登録</p>
-      </div>
+    <div className="flex flex-col justify-center w-full p-12 gap-12 text-gray-900">
+      <p className="text-2xl font-bold">新規登録</p>
 
-      <form action={formAction} className="flex-[3] flex flex-col gap-8 pb-8">
-        {state && (
-          <div className="px-4 py-2.5 rounded-lg border-2 border-red-300 bg-red-50 shadow-sm">
-            <p>{state}</p>
-          </div>
-        )}
+      <form action={handleSubmit} className="flex flex-col gap-8 mx-0.5">
+        <FormInput label={"学籍番号"} id={"student_id"} />
+        <FormInput label={"名前（ニックネーム）"} id={"name"} />
+        <FormInput label={"メールアドレス"} id={"email"} type={"email"} autoComplete={"email"}/>
+        <FormInput label={"パスワード"} id={"password"} type={"password"} autoComplete={"current-password"}/>
 
-        <Input label={"学籍番号"} id={"student_id"} autoComplete={"off"} />
-
-        <Input label={"お名前（ニックネーム）"} id={"name"} autoComplete={"name"}/>
-
-        <Input label={"メールアドレス"} id={"email"} autoComplete={"email"}/>
-
-        <Input label={"パスワード"} id={"password"} autoComplete={"current-password"}/>
-
-        <div>
-          <button type="submit" className="block w-full rounded-lg py-2.5 bg-lime-300">登録</button>
-        </div>
-
-        <div className="h-0.5 bg-gray-200"/>
-
-        <div className="space-y-2">
-          <p className="ml-0.5">すでに登録済みの方</p>
-          <LinkButton text={"ログインページ"} link={"/login"} className={"bg-lime-600 text-white"}/>
+        <div className="mx-auto">
+          <Button text={"新規登録"} className={"bg-blue-600 text-white"}/>
         </div>
       </form>
+
+      <Link className="underline text-neutral-500 hover:text-neutral-700 transition"
+            href={"/login"}>
+        すでに登録済みの方
+      </Link>
     </div>
   )
 }
