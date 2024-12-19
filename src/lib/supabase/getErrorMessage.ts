@@ -1,12 +1,10 @@
 import {AuthError} from "@supabase/auth-js";
 import {PostgrestError} from "@supabase/supabase-js";
 
-export default function getErrorMessage(error?: AuthError | PostgrestError | null) {
-  if (!error) return null;
-
+export default function getErrorMessage(error: AuthError | PostgrestError) {
   switch (error.code) {
     case undefined:
-      return null
+      return "Unknown error."
     case "invalid_credentials":
       return "メールアドレスまたはパスワードが間違っています。"
     case "email_exists":
