@@ -33,12 +33,11 @@ input, textarea, select {
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-  background: lightgray;
+  @apply rounded-full bg-neutral-300;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: gray;
+  @apply bg-neutral-400;
 }
 
 
