@@ -24,6 +24,10 @@ input, textarea, select {
   outline: none;
 }
 
+svg {
+  @apply stroke-neutral-800
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
