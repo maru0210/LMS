@@ -4,8 +4,8 @@ export const BackGround = (
   {children}: { children: ReactNode }
 ) => {
   return (
-    <div className="flex h-screen p-16 bg-neutral-50">
-      <div className="flex-[3] -ml-16">
+    <div className="flex h-screen p-16 2xl:px-32 bg-neutral-50">
+      <div className="flex-[3] -ml-16 2xl:-ml-32">
         <div className="flex justify-center items-center size-full">
           <div>
             <p className="mb-2 text-xl">学習管理システム</p>
