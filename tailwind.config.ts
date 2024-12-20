@@ -20,20 +20,20 @@ const config: Config = {
       animation: {
         fadeIn: "fadeIn .3s ease-in-out both",
         fadeOut: "fadeOut .3s ease-in-out both",
-        exit: "exit .3s ease-in both",
+        exit: "exit .3s ease-in-out 5s both",
       },
       keyframes: {
         fadeIn: {
-          from: {opacity: "0"},
-          to: {opacity: "1"}
+          from: {opacity: "0", filter: "blur(1px)"},
+          to: {opacity: "1", filter: "blur(0)"}
         },
         fadeOut: {
-          from: {opacity: "1"},
-          to: {opacity: "0"}
+          from: {opacity: "1", filter: "blur(0)"},
+          to: {opacity: "0", filter: "blur(1px)"}
         },
         exit: {
-          from: {"grid-template-rows": "1fr", filter: "blur(0px)"},
-          to: {"grid-template-rows": "0fr", filter: "blur(0.5rem)"},
+          from: {"grid-template-rows": "1fr"},
+          to: {"grid-template-rows": "0fr"},
         }
       }
     },
