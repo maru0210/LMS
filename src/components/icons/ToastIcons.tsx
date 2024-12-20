@@ -1,4 +1,4 @@
-export const SuccessSVG = (
+export const SuccessIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
        className="size-5">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -6,7 +6,7 @@ export const SuccessSVG = (
   </svg>
 )
 
-export const WarningSVG = (
+export const WarningIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
        className="size-5">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -14,7 +14,7 @@ export const WarningSVG = (
   </svg>
 )
 
-export const DangerSVG = (
+export const DangerIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
        className="size-5">
     <path strokeLinecap="round" strokeLinejoin="round"
@@ -22,7 +22,7 @@ export const DangerSVG = (
   </svg>
 )
 
-export const InfoSVG = (
+export const InfoIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"
        className="size-5">
     <path strokeLinecap="round" strokeLinejoin="round"
