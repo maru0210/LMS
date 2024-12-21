@@ -37,7 +37,7 @@ const NoticeIcon = (
 const Notice = (
   {notice}: { notice: Notice }
 ) => (
-  <div className={cn("grid", "animate-exit")}>
+  <div className={cn("grid", !notice.visible && "animate-exit")}>
     <div className="overflow-hidden">
       <div className={cn(
         "flex w-80 rounded-lg p-3 m-2 gap-1 bg-white shadow shadow-neutral-200 text-sm",

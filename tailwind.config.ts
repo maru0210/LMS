@@ -20,7 +20,7 @@ const config: Config = {
       animation: {
         fadeIn: "fadeIn .3s ease-in-out both",
         fadeOut: "fadeOut .3s ease-in-out both",
-        exit: "exit .3s ease-in-out 5s both",
+        exit: "exit .3s ease-in-out .3s both",
       },
       keyframes: {
         fadeIn: {
