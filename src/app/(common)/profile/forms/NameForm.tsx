@@ -1,13 +1,13 @@
-import {useContext, useEffect, useState} from "react";
-
-import {Input} from "@/app/(common)/profile/ProfileForm";
 import {changeName} from "@/app/(common)/profile/actions";
-import {AddToastCtx} from "@/components/Toast";
+import {Input} from "@/app/(common)/profile/components/Input";
+
+import {useNotice} from "@/components/Notice";
+import {useEffect, useState} from "react";
 
 export default function NameForm(
-  {defaultName}: {defaultName: string}
+  {defaultName}: { defaultName: string }
 ) {
-  const addToast = useContext(AddToastCtx)
+  const {notify} = useNotice()
 
   const [name, setName] = useState<string>(defaultName);
   const [newName, setNewName] = useState<string | null>(null)
@@ -17,17 +17,17 @@ export default function NameForm(
 
     changeName(newName).then(res => {
       if (res) {
-        addToast("danger", res);
+        notify("danger", res);
       } else {
         setName(newName)
-        addToast("success", `名前を \'${newName}\' に変更しました。`)
+        notify("success", `名前を \'${newName}\' に変更しました。`)
       }
     }).catch(() => {
-      addToast("danger", "予期せぬエラーが発生しました。");
+      notify("danger", "予期せぬエラーが発生しました。");
     })
 
     setNewName(null)
-  }, [addToast, name, newName])
+  }, [notify, name, newName])
 
   function handleChangeName(formData: FormData) {
     if (!formData.get("name")) return;
@@ -36,14 +36,14 @@ export default function NameForm(
     const input = (formData.get("name") as string).trim().replace(/[ 　]+/g, ' ');
 
     if (input === "") {
-      addToast("warning", "正しい名前を入力してください。")
+      notify("warning", "正しい名前を入力してください。")
       return;
     } else if (input === name) {
-      addToast("warning", "変更前の名前と同じです。")
+      notify("warning", "変更前の名前と同じです。")
       return;
     }
 
-    addToast("info", "名前を変更しています...");
+    notify("info", "名前を変更しています...");
     setNewName(input);
   }
 

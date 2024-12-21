@@ -1,11 +1,11 @@
-import {useContext, useEffect, useState} from "react";
-
-import {Input} from "@/app/(common)/profile/ProfileForm";
 import {changePassword} from "@/app/(common)/profile/actions";
-import {AddToastCtx} from "@/components/Toast";
+import {Input} from "@/app/(common)/profile/components/Input";
+
+import {useNotice} from "@/components/Notice";
+import {useEffect, useState} from "react";
 
 export default function PasswordForm() {
-  const addToast = useContext(AddToastCtx)
+  const {notify} = useNotice()
 
   const [newPassword, setNewPassword] = useState<string | null>(null)
 
@@ -14,27 +14,27 @@ export default function PasswordForm() {
 
     changePassword(newPassword).then(res => {
       if (res) {
-        addToast("danger", res);
+        notify("danger", res);
       } else {
-        addToast("success", `名前を \'${newPassword}\' に変更しました。`)
+        notify("success", `名前を \'${newPassword}\' に変更しました。`)
       }
     }).catch(() => {
-      addToast("danger", "予期せぬエラーが発生しました。");
+      notify("danger", "予期せぬエラーが発生しました。");
     })
 
     setNewPassword(null)
-  }, [addToast, newPassword])
+  }, [notify, newPassword])
 
   function handleChangePassword(formData: FormData) {
     if (!formData.get("password")) return;
     const input = formData.get("password") as string
 
     if (input === "") {
-      addToast("warning", "パスワードを入力してください。")
+      notify("warning", "パスワードを入力してください。")
       return;
     }
 
-    addToast("info", "パスワードを変更しています...");
+    notify("info", "パスワードを変更しています...");
     setNewPassword(input);
   }
 
