@@ -1,10 +1,10 @@
 "use client"
 
-import {Exam} from "@/app/(teacher)/manager/exam/actions";
 import {startExam} from "@/app/(student)/exam/actions";
+import {Exam} from "@/app/(teacher)/manager/exam/actions";
 
-export default function ExamClient(
-  {exams}: {exams: Exam[]}
+export default function ExamList(
+  {exams}: { exams: Exam[] }
 ) {
   return (
     <div>

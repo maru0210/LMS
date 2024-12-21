@@ -1,6 +1,6 @@
 import ProfileForm from "@/app/(common)/profile/ProfileForm";
 import Navigation from "@/components/Navigation";
-import {checkStatus} from "@/lib/supabase/auth";
+import {verifyUserStatus} from "@/lib/supabase/auth";
 import {getProfile} from "@/lib/supabase/profile";
 import {getCurrentUser} from "@/lib/supabase/user";
 import {Metadata} from "next";
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ProfilePage() {
-  await checkStatus("student")
+  await verifyUserStatus("student")
 
   const user = await getCurrentUser()
   const profile = await getProfile(user.id)

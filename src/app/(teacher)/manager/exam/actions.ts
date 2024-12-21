@@ -1,8 +1,8 @@
 "use server"
 
-import {Database} from "../../../../../database.types";
 import {createClient} from "@/utils/supabase/server";
 import {redirect} from "next/navigation";
+import {Database} from "../../../../../database.types";
 
 export type Exam = Database["public"]["Tables"]["exams"]["Row"]
 
@@ -36,7 +36,7 @@ export type Question = TextQ | SelectQ | NumberQ
 export async function getExams() {
   const supabase = await createClient()
   const {data, error} = await supabase.from("exams").select()
-  if(error) redirect("/error");
+  if (error) redirect("/error");
   return data
 }
 

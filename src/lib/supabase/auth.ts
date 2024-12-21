@@ -17,3 +17,9 @@ export async function verifyUserStatus(requiredStatus: Database["public"]["Enums
       redirect("/error");
   }
 }
+
+export async function redirectUserRoot() {
+  const status = await getUserStatus();
+  if (status === "student") redirect("/home");
+  else if (status === "teacher") redirect("/manager/exam");
+}

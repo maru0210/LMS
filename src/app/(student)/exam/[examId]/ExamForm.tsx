@@ -1,8 +1,8 @@
 "use client"
 
+import {finishExam} from "@/app/(student)/exam/actions";
 import {Exam, ExamData} from "@/app/(teacher)/manager/exam/actions";
 import {HTMLInputTypeAttribute} from "react";
-import {finishExam} from "@/app/(student)/exam/actions";
 
 function Input(
   {id, label, type}: { id: string, label: string; type: HTMLInputTypeAttribute },
@@ -16,7 +16,7 @@ function Input(
   )
 }
 
-export default function ExamDetailClient(
+export default function ExamForm(
   {exam}: { exam: Exam }
 ) {
   const questions = (exam.data as ExamData).questions;

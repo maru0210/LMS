@@ -1,16 +1,13 @@
-import Navigation from "@/components/Navigation";
-import {checkStatus} from "@/lib/supabase/auth";
 import {getExams} from "@/app/(teacher)/manager/exam/actions";
-import Link from "next/link";
+import Navigation from "@/components/Navigation";
 import {Metadata} from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "試験管理"
 }
 
-export default async function ExamPage() {
-  await checkStatus("teacher");
-
+export default async function Page() {
   const exams = await getExams()
 
   return (

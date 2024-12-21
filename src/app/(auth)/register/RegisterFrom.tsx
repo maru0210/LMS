@@ -3,17 +3,19 @@
 import {register} from "@/app/(auth)/actions";
 import {FormInput} from "@/app/(auth)/components/FormInput";
 import {Button} from "@/components/parts/Button";
+import {useNotice} from "@/components/Notice";
 import Link from "next/link";
 import {useActionState, useEffect} from "react"
 
 export default function RegisterForm() {
+  const {notify} = useNotice()
   const [state, handleSubmit, isPending] = useActionState(register, null)
 
   useEffect(() => {
     if (!isPending && state) {
-      console.log(state);
+      notify("warning", state)
     }
-  }, [state, isPending])
+  }, [state, isPending, notify])
 
   return (
     <div className="flex flex-col justify-center w-full p-12 gap-12 text-gray-900">

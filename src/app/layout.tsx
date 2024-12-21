@@ -1,4 +1,4 @@
-import ToastProvider from "@/components/Toast";
+import NoticeProvider from "@/components/Notice";
 import localFont from "next/font/local";
 import React from "react";
 import "./globals.css";
@@ -29,9 +29,9 @@ export default function RootLayout(
   return (
     <html lang="ja">
     <body className={[LINESeedJP.className].join(" ")}>
-    <ToastProvider>
+    <NoticeProvider>
       {children}
-    </ToastProvider>
+    </NoticeProvider>
     </body>
     </html>
   );

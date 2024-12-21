@@ -1,10 +1,10 @@
 import {getProfile} from "@/lib/supabase/profile";
 import {createClient} from "@/utils/supabase/server";
 import {redirect} from "next/navigation";
-import React from "react";
+import {ReactNode} from "react";
 
 export default async function AuthLayout(
-  {children}: Readonly<{ children: React.ReactNode }>
+  {children}: Readonly<{ children: ReactNode }>
 ) {
   const supabase = await createClient();
   const {data: {user}} = await supabase.auth.getUser()

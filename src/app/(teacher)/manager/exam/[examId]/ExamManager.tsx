@@ -1,12 +1,10 @@
 "use client"
 
-import React, {HTMLInputTypeAttribute, useContext, useState} from "react";
-
 import {Exam, ExamData, Question, saveExam, TextQ} from "@/app/(teacher)/manager/exam/actions";
-import {AddToastCtx} from "@/components/Toast";
 import convertJson from "@/app/(teacher)/manager/exam/libs/convertJson";
+import {useNotice} from "@/components/Notice";
 import Image from "next/image";
-
+import React, {HTMLInputTypeAttribute, useState} from "react";
 
 function Input(
   {id, type, label, value, readonly = false}: {
@@ -57,7 +55,7 @@ function Button(
 export default function ExamManager(
   {defaultExam}: { defaultExam: Exam }
 ) {
-  const addToast = useContext(AddToastCtx)
+  const {notify} = useNotice()
 
   // const [exam, setExam] = useState<Exam>(defaultExam)
   const [questions, setQuestions] = useState<Question[]>((defaultExam.data as ExamData).questions)
@@ -65,7 +63,7 @@ export default function ExamManager(
   function saveExamHandler(formData: FormData) {
     const data = convertJson(formData);
     if (data.error) {
-      addToast("danger", data.error)
+      notify("danger", data.error)
       return;
     }
 

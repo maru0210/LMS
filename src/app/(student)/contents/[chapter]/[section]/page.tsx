@@ -1,10 +1,10 @@
 import Navigation from "@/components/Navigation";
-import {checkStatus} from "@/lib/supabase/auth";
 import {getDetail} from "@/lib/microCMS/microcms";
+import {verifyUserStatus} from "@/lib/supabase/auth";
 import {Metadata} from "next";
 
 export async function generateMetadata(
-  {params}: {params: Promise<{chapter: string, section: string}> }
+  {params}: { params: Promise<{ chapter: string, section: string }> }
 ): Promise<Metadata> {
   const {section} = await params
   const post = await getDetail(section, {fields: "title"})
@@ -15,10 +15,10 @@ export async function generateMetadata(
   }
 }
 
-export default async function DetailPage(
+export default async function Page(
   {params}: { params: Promise<{ chapter: string, section: string }> }
 ) {
-  await checkStatus("student");
+  await verifyUserStatus("student")
 
   const {section} = await params;
   const post = await getDetail(section);

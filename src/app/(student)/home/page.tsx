@@ -1,15 +1,15 @@
-import Navigation from "@/components/Navigation";
 import ChapterCard from "@/app/(student)/home/ChapterCard";
-import {checkStatus} from "@/lib/supabase/auth";
-import {Metadata} from "next";
+import Navigation from "@/components/Navigation";
 import {getChapters, getContents} from "@/lib/microCMS/microcms";
+import {verifyUserStatus} from "@/lib/supabase/auth";
+import {Metadata} from "next";
 
 export const metadata: Metadata = {
   title: "学習コンテンツ"
 }
 
-export default async function Home() {
-  await checkStatus("student");
+export default async function Page() {
+  await verifyUserStatus("student")
 
   const {contents: chapters} = await getChapters();
   const {contents: contents} = await getContents({orders: "section"});
@@ -17,13 +17,6 @@ export default async function Home() {
   return (
     <Navigation>
       <div className="flex flex-col gap-8">
-        {/*<div>*/}
-        {/*  <div className="w-full rounded-lg p-4 space-y-2 border-0 border-lime-100 bg-lime-50 shadow">*/}
-        {/*    <p className="">前回の続き</p>*/}
-        {/*    <p className="text-sm">ここに最後に学習したコンテンツが入ります</p>*/}
-        {/*  </div>*/}
-        {/*</div>*/}
-
         <h1 className="text-lg">学習コンテンツ</h1>
 
         <div className="flex flex-wrap gap-8">

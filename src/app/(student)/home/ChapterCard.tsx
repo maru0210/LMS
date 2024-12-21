@@ -1,8 +1,8 @@
-import Link from "next/link";
 import {Content} from "@/lib/microCMS/microcms";
+import Link from "next/link";
 
 export default async function ChapterCard(
-  {contents}: {contents: Content[]},
+  {contents}: { contents: Content[] },
 ) {
   return (
     <div className="w-full md:w-[calc((100%-2rem)/2)] xl:w-[calc((100%-2rem*2)/3)] rounded-lg p-4 shadow">
