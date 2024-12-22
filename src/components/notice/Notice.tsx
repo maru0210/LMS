@@ -59,6 +59,15 @@ export default function NoticeProvider({children}: { children: ReactNode }) {
   const pathname = usePathname()
   const [notices, setNotices] = useState<Notice[]>([]);
 
+  const removeNotice = useCallback((id: number) => {
+    setNotices(prevState => (
+      prevState.map(value => value.id === id ? {...value, visible: false} : value)
+    ))
+    setTimeout(() => {
+      setNotices(prevState => prevState.filter(value => value.id !== id))
+    }, 600)
+  }, [])
+
   const addNotice = useCallback((type: NoticeType, message: string) => {
     const id = Date.now()
     setNotices(prevState => [...prevState, {id, type, message, visible: true}]);
@@ -79,7 +88,7 @@ export default function NoticeProvider({children}: { children: ReactNode }) {
   }, [pathname])
 
   return (
-    <NoticeContext.Provider value={{notify: addNotice}}>
+    <NoticeContext.Provider value={{notify: addNotice, removeNotice: removeNotice}}>
       <div className="fixed top-0 right-0">
         <div className="flex flex-col m-4">
           {notices.map((notice) => (
