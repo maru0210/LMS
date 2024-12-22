@@ -2,7 +2,8 @@
 
 import {DangerIcon, InfoIcon, ProcessingIcon, SuccessIcon, WarningIcon} from "@/components/icons/NoticeIcons";
 import {cn} from "@/lib/utils";
-import {createContext, ReactNode, useCallback, useContext, useState} from "react";
+import {usePathname} from "next/navigation";
+import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from "react";
 
 type NoticeType = "success" | "warning" | "danger" | "info" | "processing";
 
@@ -87,6 +88,9 @@ export default function NoticeProvider({children}: { children: ReactNode }) {
 
     return id;
   }, [removeNotice])
+
+  const pathname = usePathname()
+  useEffect(() => setNotices([]), [pathname])
 
   return (
     <NoticeContext.Provider value={{notify: addNotice, removeNotice: removeNotice}}>
