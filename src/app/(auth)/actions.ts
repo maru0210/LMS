@@ -3,7 +3,6 @@
 import {redirectUserRoot} from "@/lib/supabase/auth";
 import getErrorMessage from "@/lib/supabase/getErrorMessage";
 import {createClient} from "@/utils/supabase/server";
-import {redirect} from "next/navigation";
 
 export async function login(_: string | null, formData: FormData) {
   const supabase = await createClient()
@@ -41,8 +40,3 @@ export async function register(_: string | null, formData: FormData) {
   return null
 }
 
-export async function logout() {
-  const supabase = await createClient()
-  const {error} = await supabase.auth.signOut({scope: "local"})
-  if (error) redirect('/error')
-}
