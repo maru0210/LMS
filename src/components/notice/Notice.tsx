@@ -56,7 +56,6 @@ const Notice = (
 )
 
 export default function NoticeProvider({children}: { children: ReactNode }) {
-  const pathname = usePathname()
   const [notices, setNotices] = useState<Notice[]>([]);
 
   const removeNotice = useCallback((id: number) => {
@@ -72,20 +71,12 @@ export default function NoticeProvider({children}: { children: ReactNode }) {
     const id = Date.now()
     setNotices(prevState => [...prevState, {id, type, message, visible: true}]);
 
-    setTimeout(() => {
-      setNotices(prevState => (
-        prevState.map(value => value.id === id ? {...value, visible: false} : value)
-      ));
-    }, 4700)
+    if (type !== "processing") {
+      setTimeout(() => removeNotice(id), 5300)
+    }
 
-    setTimeout(() => {
-      setNotices(prevState => prevState.filter(value => value.id !== id))
-    }, 5300)
-  }, [])
-
-  useEffect(() => {
-    setNotices([]);
-  }, [pathname])
+    return id;
+  }, [removeNotice])
 
   return (
     <NoticeContext.Provider value={{notify: addNotice, removeNotice: removeNotice}}>
