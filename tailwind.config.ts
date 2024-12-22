@@ -21,6 +21,7 @@ const config: Config = {
       animation: {
         fadeIn: "fadeIn .3s ease-in-out both",
         fadeOut: "fadeOut .3s ease-in-out both",
+        shrink: "shrink 5s linear .3s both",
         exit: "exit .3s ease-in-out .3s both",
       },
       keyframes: {
@@ -31,6 +32,10 @@ const config: Config = {
         fadeOut: {
           from: {opacity: "1", filter: "blur(0)"},
           to: {opacity: "0", filter: "blur(1px)"}
+        },
+        shrink: {
+          from: {width: "100%"},
+          to: {width: "0"}
         },
         exit: {
           from: {"grid-template-rows": "1fr"},
