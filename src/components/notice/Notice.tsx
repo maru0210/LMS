@@ -1,11 +1,10 @@
 "use client"
 
-import {DangerIcon, InfoIcon, SuccessIcon, WarningIcon} from "@/components/icons/NoticeIcons";
+import {DangerIcon, InfoIcon, ProcessingIcon, SuccessIcon, WarningIcon} from "@/components/icons/NoticeIcons";
 import {cn} from "@/lib/utils";
-import {usePathname} from "next/navigation";
-import {createContext, ReactNode, useCallback, useContext, useEffect, useState} from "react";
+import {createContext, ReactNode, useCallback, useContext, useState} from "react";
 
-type NoticeType = "success" | "warning" | "danger" | "info";
+type NoticeType = "success" | "warning" | "danger" | "info" | "processing";
 
 type Notice = {
   id: number;
@@ -36,6 +35,8 @@ const NoticeIcon = (
       return <div className="[&>svg]:stroke-danger"><DangerIcon/></div>
     case "info":
       return <div className="[&>svg]:stroke-info"><InfoIcon/></div>
+    case "processing":
+      return <div className="[&_circle]:fill-processing"><ProcessingIcon/></div>
   }
 }
 
@@ -45,11 +46,20 @@ const Notice = (
   <div className={cn("grid", !notice.visible && "animate-exit")}>
     <div className="overflow-hidden">
       <div className={cn(
-        "flex w-80 rounded-lg p-3 m-2 gap-1 bg-white shadow shadow-neutral-200 text-sm",
+        "flex flex-col overflow-hidden relative w-80 rounded-lg m-2 bg-white shadow shadow-neutral-200 text-sm",
         notice.visible ? "animate-fadeIn" : "animate-fadeOut"
       )}>
-        <NoticeIcon type={notice.type}/>
-        <p>{notice.message}</p>
+        <div className="flex gap-1 p-3 pb-3">
+          <NoticeIcon type={notice.type}/>
+          <p>{notice.message}</p>
+        </div>
+        {
+          notice.type !== "processing" && (
+            <div className="absolute bottom-0 w-full h-0.5 bg-neutral-100">
+              <div className="h-full bg-neutral-300 animate-shrink"/>
+            </div>
+          )
+        }
       </div>
     </div>
   </div>
