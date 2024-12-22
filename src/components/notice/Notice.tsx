@@ -14,8 +14,13 @@ type Notice = {
   visible: boolean;
 }
 
+type NoticeContextType = {
+  notify: (type: NoticeType, message: string) => number;
+  removeNotice: (id: number) => void;
+}
+
 const NoticeContext
-  = createContext<{ notify: (type: NoticeType, message: string) => void }>({notify: () => 0})
+  = createContext<NoticeContextType>({notify: () => 0, removeNotice: () => 0});
 
 export const useNotice = () => useContext(NoticeContext);
 
