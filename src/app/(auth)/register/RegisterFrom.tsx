@@ -3,7 +3,7 @@
 import {register} from "@/app/(auth)/actions";
 import {FormInput} from "@/app/(auth)/components/FormInput";
 import {Button} from "@/components/parts/Button";
-import {useNotice} from "@/components/Notice";
+import {useNotice} from "@/components/notice/Notice";
 import Link from "next/link";
 import {useActionState, useEffect} from "react"
 

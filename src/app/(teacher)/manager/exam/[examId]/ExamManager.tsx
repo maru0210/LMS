@@ -2,7 +2,7 @@
 
 import {Exam, ExamData, Question, saveExam, TextQ} from "@/app/(teacher)/manager/exam/actions";
 import convertJson from "@/app/(teacher)/manager/exam/libs/convertJson";
-import {useNotice} from "@/components/Notice";
+import {useNotice} from "@/components/notice/Notice";
 import Image from "next/image";
 import React, {HTMLInputTypeAttribute, useState} from "react";
 

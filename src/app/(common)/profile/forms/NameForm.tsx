@@ -1,7 +1,7 @@
 import {changeName} from "@/app/(common)/profile/actions";
 import {Input} from "@/app/(common)/profile/components/Input";
 
-import {useNotice} from "@/components/Notice";
+import {useNotice} from "@/components/notice/Notice";
 import {useEffect, useState} from "react";
 
 export default function NameForm(

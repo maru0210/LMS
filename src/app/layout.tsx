@@ -1,4 +1,4 @@
-import NoticeProvider from "@/components/Notice";
+import NoticeProvider from "@/components/notice/Notice";
 import localFont from "next/font/local";
 import React from "react";
 import "./globals.css";
