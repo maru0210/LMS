@@ -2,19 +2,19 @@
 
 import {login} from "@/app/(auth)/actions";
 import {FormInput} from "@/app/(auth)/components/FormInput";
-import {useNotice} from "@/components/Notice";
+import {useActionStateWithNotice} from "@/components/notice/hooks";
+import {useNotice} from "@/components/notice/Notice";
 import {Button} from "@/components/parts/Button";
 import Link from "next/link";
-import {useActionState, useEffect} from "react"
+import {useEffect} from "react"
 
 export default function LoginForm() {
   const {notify} = useNotice();
-  const [state, handleSubmit, isPending] = useActionState(login, null)
 
+  const [state, handleSubmit, isPending] = useActionStateWithNotice(login, null, {processing: "認証中...",});
   useEffect(() => {
-    if (isPending) notify("info", "認証中...")
-    else if (state) notify("warning", state)
-  }, [state, isPending, notify])
+    if (!isPending && state) notify("warning", state)
+  }, [isPending, notify, state]);
 
   return (
     <div className="flex flex-col justify-center w-full p-12 gap-12 text-gray-900">
