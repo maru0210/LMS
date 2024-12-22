@@ -15,7 +15,8 @@ const config: Config = {
         success: "#14A44D",
         warning: "#E4A11B",
         danger: "#DC4C64",
-        info: "#54B4D3"
+        info: "#54B4D3",
+        processing: "#1F2937"
       },
       animation: {
         fadeIn: "fadeIn .3s ease-in-out both",
