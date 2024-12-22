@@ -1,7 +1,7 @@
 "use client"
 
-import {logout} from "@/app/(auth)/actions";
 import {ExamIcon, GradeIcon, HomeIcon, LogoutIcon, UserIcon} from "@/components/icons/NavigationIcons";
+import {logout} from "@/lib/supabase/auth";
 import {cn} from "@/lib/utils";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
