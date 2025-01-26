@@ -22,14 +22,14 @@ export default async function Page({
 
   return (
     <Navigation>
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-xl py-8">
         <p className={"mb-2 text-sm text-neutral-700"}>
           {`${toZenkaku(post.chapter.number)}章 ${post.chapter.title} /`}
         </p>
-        <h2 className="mb-8 border-b-8 border-b-blue-300 px-2 py-1.5 text-xl">{`${toZenkaku(post.number)}. ${post.title}`}</h2>
+        <h2 className="mb-16 text-xl">{`${toZenkaku(post.number)}. ${post.title}`}</h2>
         <div
           dangerouslySetInnerHTML={{ __html: post.content }}
-          className="flex flex-col gap-4 [&>*:first-child]:m-0 [&>:is(h1,h2,h3)]:mt-4 [&>h1]:text-xl [&>h1]:font-bold"
+          className="flex flex-col gap-4 [&>*:first-child]:m-0 [&>:is(h1,h2,h3)]:mt-8 [&>h1]:text-xl [&>h1]:font-bold"
         />
       </div>
     </Navigation>
