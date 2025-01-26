@@ -1,9 +1,11 @@
 import {getExam} from "@/app/(student)/exam/actions";
 import {getExamLog} from "@/app/(teacher)/manager/grade/actions";
 import Navigation from "@/components/Navigation";
+import {verifyUserStatus} from "@/lib/supabase/auth";
 import {getProfile} from "@/lib/supabase/profile";
 
 export default async function Grade() {
+  await verifyUserStatus("teacher")
 
   const examLog = await getExamLog();
   const examFinLog

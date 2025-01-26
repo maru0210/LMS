@@ -1,5 +1,6 @@
 import {getExams} from "@/app/(teacher)/manager/exam/actions";
 import Navigation from "@/components/Navigation";
+import {verifyUserStatus} from "@/lib/supabase/auth";
 import {Metadata} from "next";
 import Link from "next/link";
 
@@ -8,6 +9,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
+  await verifyUserStatus("teacher")
+
   const exams = await getExams()
 
   return (
