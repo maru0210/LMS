@@ -9,26 +9,24 @@ const BIZUDP = localFont({
     {
       path: "../fonts/BIZUDPGothic-Regular.woff2",
       weight: "400",
-      style: "normal"
+      style: "normal",
     },
     {
       path: "../fonts/BIZUDPGothic-Bold.woff2",
       weight: "700",
-      style: "bold"
-    }
-  ]
+      style: "bold",
+    },
+  ],
 });
 
-export default function RootLayout(
-  { children }: Readonly<{ children: React.ReactNode; }>
-) {
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ja">
-    <body className={cn(BIZUDP.className, "leading-relaxed tracking-wider")}>
-    <NoticeProvider>
-      {children}
-    </NoticeProvider>
-    </body>
+      <body className={cn(BIZUDP.className, "leading-relaxed tracking-wider")}>
+        <NoticeProvider>{children}</NoticeProvider>
+      </body>
     </html>
   );
 }

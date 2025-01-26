@@ -3,8 +3,7 @@ export function cn(...className: (string | undefined | false)[]) {
 }
 
 export function toZenkaku(n: number) {
-  return String(n).replace(
-    /[0-9]/g,
-    s => String.fromCharCode(Number(s) + "０".charCodeAt(0))
+  return String(n).replace(/[0-9]/g, (s) =>
+    String.fromCharCode(Number(s) + "０".charCodeAt(0)),
   );
 }

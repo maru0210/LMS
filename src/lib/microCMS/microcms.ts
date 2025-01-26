@@ -1,4 +1,4 @@
-import {createClient, MicroCMSDate, MicroCMSQueries,} from "microcms-js-sdk";
+import { createClient, MicroCMSDate, MicroCMSQueries } from "microcms-js-sdk";
 
 // コンテンツの型定義
 export type Content = {
@@ -7,7 +7,7 @@ export type Content = {
   number: number;
   title: string;
   slug: string;
-  content: string
+  content: string;
 } & MicroCMSDate;
 
 export type Chapter = {
@@ -35,8 +35,8 @@ export const getChapters = async (queries?: MicroCMSQueries) => {
   return await client.getList<Chapter>({
     endpoint: "chapters",
     queries,
-  })
-}
+  });
+};
 
 // 学習コンテンツ一覧を取得
 export const getContents = async (queries?: MicroCMSQueries) => {
@@ -49,7 +49,7 @@ export const getContents = async (queries?: MicroCMSQueries) => {
 // 学習コンテンツの詳細を取得
 export const getDetail = async (
   contentId: string,
-  queries?: MicroCMSQueries
+  queries?: MicroCMSQueries,
 ) => {
   return await client.getListDetail<Content>({
     endpoint: "contents",

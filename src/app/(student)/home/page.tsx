@@ -5,13 +5,13 @@ import { verifyUserStatus } from "@/lib/supabase/auth";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "学習コンテンツ"
+  title: "学習コンテンツ",
 };
 
 export default async function Page() {
   await verifyUserStatus("student");
 
-  const {contents: chapters} = await getChapters();
+  const { contents: chapters } = await getChapters();
 
   return (
     <Navigation>
@@ -19,11 +19,8 @@ export default async function Page() {
         <h1 className="text-xl font-bold">学習コンテンツ</h1>
 
         <div className="flex flex-wrap gap-8">
-          {chapters.map(chapter => (
-            <ChapterCard
-              chapter={chapter}
-              key={chapter.id}
-            />
+          {chapters.map((chapter) => (
+            <ChapterCard chapter={chapter} key={chapter.id} />
           ))}
         </div>
       </div>

@@ -1,26 +1,26 @@
 import ProfileForm from "@/app/(common)/profile/ProfileForm";
 import Navigation from "@/components/Navigation";
-import {verifyUserStatus} from "@/lib/supabase/auth";
-import {getProfile} from "@/lib/supabase/profile";
-import {getCurrentUser} from "@/lib/supabase/user";
-import {Metadata} from "next";
+import { verifyUserStatus } from "@/lib/supabase/auth";
+import { getProfile } from "@/lib/supabase/profile";
+import { getCurrentUser } from "@/lib/supabase/user";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "プロフィールの変更"
-}
+  title: "プロフィールの変更",
+};
 
 export default async function ProfilePage() {
-  await verifyUserStatus("student")
+  await verifyUserStatus("student");
 
-  const user = await getCurrentUser()
-  const profile = await getProfile(user.id)
+  const user = await getCurrentUser();
+  const profile = await getProfile(user.id);
 
   return (
     <Navigation isAdmin={profile.status === "teacher"}>
       <div className="flex flex-col">
         <h1 className="mb-4 text-lg">プロフィールの変更</h1>
-        <ProfileForm defaultUser={user} defaultProfile={profile}/>
+        <ProfileForm defaultUser={user} defaultProfile={profile} />
       </div>
     </Navigation>
-  )
+  );
 }
