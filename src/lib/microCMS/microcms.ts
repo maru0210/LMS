@@ -4,20 +4,15 @@ import {createClient, MicroCMSDate, MicroCMSQueries,} from "microcms-js-sdk";
 export type Content = {
   id: string;
   chapter: Chapter;
-  section: number;
   title: string;
-  content: string;
-  questions: [{
-    fieldId: string;
-    text: string;
-    answer: string;
-  }]
+  slug: string;
+  content: string
 } & MicroCMSDate;
 
 export type Chapter = {
   id: string;
   title: string;
-  number: number;
+  slug: string;
 } & MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
