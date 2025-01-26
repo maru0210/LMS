@@ -4,6 +4,7 @@ import {createClient, MicroCMSDate, MicroCMSQueries,} from "microcms-js-sdk";
 export type Content = {
   id: string;
   chapter: Chapter;
+  number: number;
   title: string;
   slug: string;
   content: string
@@ -11,6 +12,7 @@ export type Content = {
 
 export type Chapter = {
   id: string;
+  number: number;
   title: string;
   slug: string;
 } & MicroCMSDate;
