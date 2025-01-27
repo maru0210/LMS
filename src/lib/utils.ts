@@ -7,3 +7,9 @@ export function toZenkaku(n: number) {
     String.fromCharCode(Number(s) + "０".charCodeAt(0)),
   );
 }
+
+export function fmtDate(date: Date) {
+  return (
+    date.toLocaleDateString() + " " + date.toLocaleTimeString().slice(0, -3)
+  );
+}

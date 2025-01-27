@@ -2,7 +2,25 @@ import Navigation from "@/components/Navigation";
 import { getContents } from "@/lib/microCMS/microcms";
 import { verifyUserStatus } from "@/lib/supabase/auth";
 import { toZenkaku } from "@/lib/utils";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ contentSlug: string; sectionSlug: string }>;
+}): Promise<Metadata> {
+  const { contentSlug } = await params;
+  const { contents, totalCount } = await getContents({
+    filters: "slug[equals]" + contentSlug,
+  });
+
+  if (totalCount !== 1) return {};
+
+  return {
+    title: contents[0].title,
+  };
+}
 
 export default async function Page({
   params,

@@ -1,22 +1,43 @@
+"use server";
+
 import { ExamData } from "@/app/(teacher)/manager/exam/actions";
 import { getCurrentUser } from "@/lib/supabase/user";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 
-export async function getExams() {
+export type ExamSummary = {
+  id: string;
+  name: string;
+  is_once: boolean;
+  since: string;
+  until: string;
+};
+
+export async function getExamList() {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("exams")
-    .select()
-    .eq("is_public", true);
-  if (error) redirect("/error");
-  return data;
+    .select("id,name,is_once,since,until")
+    .eq("available", true)
+    .order("since");
+  if (error) throw error;
+  return data as ExamSummary[];
 }
 
-export async function getExam(id: string) {
+export async function getExamSummary(id: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("exams")
+    .select("id,name,is_once,since,until")
+    .eq("id", id);
+  if (error || data?.length !== 1) throw error;
+  return data[0];
+}
+
+export async function getExamDetails(id: string) {
   const supabase = await createClient();
   const { data, error } = await supabase.from("exams").select().eq("id", id);
-  if (error || !data) redirect("/error");
+  if (error || data?.length !== 1) throw error;
   return data[0];
 }
 
@@ -25,15 +46,15 @@ export async function startExam(id: string) {
   const { error } = await supabase.from("exam_log").insert({
     user: (await getCurrentUser()).id,
     exam: id,
-    action: "start",
+    action: "BEGIN",
   });
-  if (error) redirect("/error");
-  redirect(`/exam/${id}`);
+  if (error) throw error;
+  return await getExamDetails(id);
 }
 
 export async function finishExam(id: string, formData: FormData) {
   // 点数を計算
-  const exam = await getExam(id);
+  const exam = await getExamDetails(id);
   const questions = (exam.data as ExamData).questions;
   const answers = [...formData.entries()];
   if (questions.length !== answers.length) {

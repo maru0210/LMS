@@ -1,4 +1,4 @@
-import { getExam } from "@/app/(student)/exam/actions";
+import { getExamSummary } from "@/app/(student)/exam/actions";
 import { getExamLog } from "@/app/(teacher)/manager/grade/actions";
 import Navigation from "@/components/Navigation";
 import { verifyUserStatus } from "@/lib/supabase/auth";
@@ -17,7 +17,7 @@ export default async function Grade() {
       profiles.set(value.user, (await getProfile(value.user)).name);
     }
     if (exams.get(value.exam) === undefined) {
-      exams.set(value.exam, (await getExam(value.exam)).name);
+      exams.set(value.exam, (await getExamSummary(value.exam)).name);
     }
   }
 

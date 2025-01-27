@@ -1,4 +1,4 @@
-import { getExam } from "@/app/(student)/exam/actions";
+import { getExamSummary } from "@/app/(student)/exam/actions";
 import ExamManager from "@/app/(teacher)/manager/exam/[examId]/ExamManager";
 import Navigation from "@/components/Navigation";
 import { Metadata } from "next";
@@ -9,7 +9,7 @@ export async function generateMetadata({
   params: Promise<{ examId: string }>;
 }): Promise<Metadata> {
   const { examId } = await params;
-  const exam = await getExam(examId);
+  const exam = await getExamSummary(examId);
 
   return {
     title: "試験管理‐" + exam.name,
@@ -23,7 +23,7 @@ export default async function Page({
 }) {
   const examId = (await params).examId;
 
-  const exam = await getExam(examId);
+  const exam = await getExamSummary(examId);
   console.log(exam);
 
   return (

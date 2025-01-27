@@ -2,6 +2,7 @@
 
 import { finishExam } from "@/app/(student)/exam/actions";
 import { Exam, ExamData } from "@/app/(teacher)/manager/exam/actions";
+import { toZenkaku } from "@/lib/utils";
 import { HTMLInputTypeAttribute } from "react";
 
 function Input({
@@ -44,8 +45,8 @@ export default function ExamForm({ exam }: { exam: Exam }) {
     <div className="mx-auto flex max-w-screen-sm flex-col gap-16">
       <form id={"exam"} action={handleSubmit} className="flex flex-col gap-8">
         {questions.map((question, index) => (
-          <div className="flex" key={question.id}>
-            <p className="w-8">問{index + 1}.</p>
+          <div className="flex gap-1" key={question.id}>
+            <p>問{index + 1}. </p>
             <Input id={question.id} type={"text"} label={question.statement} />
           </div>
         ))}

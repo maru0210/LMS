@@ -1,35 +1,20 @@
 "use client";
 
-import { startExam } from "@/app/(student)/exam/actions";
-import { Exam } from "@/app/(teacher)/manager/exam/actions";
+import { type ExamSummary } from "@/app/(student)/exam/actions";
 
-export default function ExamList({ exams }: { exams: Exam[] }) {
+export default function ExamList({ list }: { list: ExamSummary[] }) {
   return (
-    <div>
-      {exams.map((exam) => (
-        <div className="flex items-center justify-between" key={exam.id}>
-          <div className="flex flex-col p-2">
-            <div className="flex items-center gap-4">
-              <p className="text-lg">{exam.name}</p>
-              {exam.is_once && (
-                <p className="text-sm text-neutral-700">一度のみ</p>
-              )}
+    <ul className="ml-6 list-disc">
+      {list.map((exam) => (
+        <li className="rounded-lg transition" key={exam.id}>
+          <a className="inline-block" href={`/exam/${exam.id}`}>
+            <div className="flex items-center gap-2 border-b border-neutral-500 border-opacity-0 px-1 transition [&:hover]:border-opacity-100">
+              <p className="text">{exam.name}</p>
+              {exam.is_once && <p className="text-sm">（一度のみ）</p>}
             </div>
-            <p className="text-sm">
-              作成日: {new Date(exam.created_at).toLocaleString()}
-            </p>
-          </div>
-
-          <div>
-            <button
-              onClick={() => startExam(exam.id)}
-              className="rounded-lg border-2 border-neutral-300 px-2 py-0.5 text-neutral-700 shadow-sm transition hover:shadow-md"
-            >
-              開始
-            </button>
-          </div>
-        </div>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
