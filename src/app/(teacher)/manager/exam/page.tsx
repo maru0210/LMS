@@ -26,9 +26,9 @@ export default async function Page() {
                   <p className="text-sm text-neutral-700">一度のみ</p>
                 )}
               </div>
-              <p className="text-sm">
-                作成日: {new Date(exam.created_at).toLocaleString()}
-              </p>
+              {/*<p className="text-sm">*/}
+              {/*  作成日: {new Date(exam.created_at).toLocaleString()}*/}
+              {/*</p>*/}
             </div>
 
             <div>

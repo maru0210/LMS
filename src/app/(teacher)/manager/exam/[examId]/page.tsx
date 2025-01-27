@@ -1,5 +1,6 @@
 import { getExamSummary } from "@/app/(student)/exam/actions";
 import ExamManager from "@/app/(teacher)/manager/exam/[examId]/ExamManager";
+import { getExam } from "@/app/(teacher)/manager/exam/actions";
 import Navigation from "@/components/Navigation";
 import { Metadata } from "next";
 
@@ -23,7 +24,7 @@ export default async function Page({
 }) {
   const examId = (await params).examId;
 
-  const exam = await getExamSummary(examId);
+  const exam = await getExam(examId);
   console.log(exam);
 
   return (

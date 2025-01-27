@@ -42,8 +42,9 @@ export async function getExams() {
 
 export async function getExam(id: string) {
   const supabase = await createClient();
-  const { data } = await supabase.from("exams").select().eq("id", id);
-  return data;
+  const { data, error } = await supabase.from("exams").select().eq("id", id);
+  if (error || data?.length !== 1) throw error;
+  return data[0];
 }
 
 export async function saveExam(id: string, questions: Question[]) {
