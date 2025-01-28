@@ -5,6 +5,7 @@ import Link from "next/link";
 export default async function ChapterCard({ chapter }: { chapter: Chapter }) {
   const { contents, totalCount } = await getContents({
     filters: "chapter[equals]" + chapter.id,
+    orders: "number",
   });
 
   return (

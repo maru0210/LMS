@@ -22,8 +22,8 @@ export default function RegisterForm() {
       <p className="text-2xl font-bold">新規登録</p>
 
       <form action={handleSubmit} className="mx-0.5 flex flex-col gap-8">
-        <FormInput label={"学籍番号"} id={"student_id"} />
-        <FormInput label={"名前（ニックネーム）"} id={"name"} />
+        <FormInput label={"学籍番号"} id={"student_id"}/>
+        <FormInput label={"氏名"} id={"name"}/>
         <FormInput
           label={"メールアドレス"}
           id={"email"}

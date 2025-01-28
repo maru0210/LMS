@@ -1,8 +1,8 @@
 "use client";
 
 import { finishExam } from "@/app/(student)/exam/actions";
-import { Exam, ExamData } from "@/app/(teacher)/manager/exam/actions";
-import { toZenkaku } from "@/lib/utils";
+import { ExamData } from "@/lib/exam";
+import { Exam } from "@/lib/supabase/exam";
 import { HTMLInputTypeAttribute } from "react";
 
 function Input({

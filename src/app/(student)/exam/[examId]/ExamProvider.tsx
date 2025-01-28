@@ -2,7 +2,7 @@
 
 import ExamForm from "@/app/(student)/exam/[examId]/ExamForm";
 import { startExam } from "@/app/(student)/exam/actions";
-import { Exam } from "@/app/(teacher)/manager/exam/actions";
+import { Exam } from "@/lib/supabase/exam";
 import { useState } from "react";
 
 export default function ExamProvider({ id }: { id: string }) {

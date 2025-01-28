@@ -1,6 +1,6 @@
 "use server";
 
-import { ExamData } from "@/app/(teacher)/manager/exam/actions";
+import { ExamData } from "@/lib/exam";
 import { getCurrentUser } from "@/lib/supabase/user";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -77,7 +77,7 @@ export async function finishExam(id: string, formData: FormData) {
   const { error } = await supabase.from("exam_log").insert({
     user: (await getCurrentUser()).id,
     exam: exam.id,
-    action: "finish",
+    action: "END",
     data: score.toString(),
   });
   if (error) redirect("/error");

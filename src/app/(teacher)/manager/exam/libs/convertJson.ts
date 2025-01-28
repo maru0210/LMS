@@ -1,42 +1,32 @@
-import { Question, TextQ } from "@/app/(teacher)/manager/exam/actions";
+import { Question } from "@/lib/exam";
 
-export default function convertJson(formData: FormData): {
-  questions: Question[];
-  error: string | null;
-} {
+export default function convertJson(formData: FormData): Question[] {
   const data = [...formData.entries()];
+  if (data.length % 3 !== 0) throw "Error 1";
 
   const questions: Question[] = [];
 
-  let i = 0;
-  while (i < data.length) {
-    if (!data[i][0].endsWith("-type"))
-      return { questions: [], error: 'endsWith("-type") is false' };
+  while (data.length > 0) {
+    const e1 = data.shift();
+    const e2 = data.shift();
+    const e3 = data.shift();
+    if (!e1 || !e2 || !e3) throw "Error 2";
 
-    switch (data[i][1]) {
-      case "TEXT":
-        if (
-          !(
-            data[i + 1][0].endsWith("-id") &&
-            data[i + 2][0].endsWith("-point") &&
-            data[i + 3][0].endsWith("-statement") &&
-            data[i + 4][0].endsWith("-answer")
-          )
-        )
-          return { questions: [], error: "not right data pattern." };
+    const id = e1[0].split("-")[0];
 
-        const q: TextQ = {
-          type: "TEXT",
-          id: data[i + 1][1] as string,
-          point: Number(data[i + 2][1] as string),
-          statement: data[i + 3][1] as string,
-          answer: data[i + 4][1] as string,
-        };
+    if (!e2[0].startsWith(id) || !e3[0].startsWith(id)) throw "Error 3";
 
-        questions.push(q);
-        i += 5;
-    }
+    const statement = e1[1] as string;
+    const point = Number(e2[1] as string);
+    const answer = e3[1] as string;
+
+    questions.push({
+      id,
+      statement,
+      point,
+      answer,
+    });
   }
 
-  return { questions: questions, error: null };
+  return questions;
 }

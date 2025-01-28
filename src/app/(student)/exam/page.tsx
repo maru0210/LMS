@@ -1,7 +1,7 @@
+import ExamList from "@/components/exam/ExamList";
 import Navigation from "@/components/Navigation";
-import { getExamList } from "@/app/(student)/exam/actions";
-import ExamList from "@/app/(student)/exam/ExamList";
 import { verifyUserStatus } from "@/lib/supabase/auth";
+import { getExamList } from "@/lib/supabase/exam";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
