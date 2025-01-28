@@ -1,4 +1,4 @@
-import type {Config} from "tailwindcss";
+import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
@@ -15,27 +15,33 @@ const config: Config = {
         success: "#14A44D",
         warning: "#E4A11B",
         danger: "#DC4C64",
-        info: "#54B4D3"
+        info: "#54B4D3",
+        processing: "#1F2937",
       },
       animation: {
         fadeIn: "fadeIn .3s ease-in-out both",
         fadeOut: "fadeOut .3s ease-in-out both",
-        exit: "exit .3s ease-in both",
+        shrink: "shrink 5s linear .3s both",
+        exit: "exit .3s ease-in-out .3s both",
       },
       keyframes: {
         fadeIn: {
-          from: {opacity: "0"},
-          to: {opacity: "1"}
+          from: { opacity: "0", filter: "blur(1px)" },
+          to: { opacity: "1", filter: "blur(0)" },
         },
         fadeOut: {
-          from: {opacity: "1"},
-          to: {opacity: "0"}
+          from: { opacity: "1", filter: "blur(0)" },
+          to: { opacity: "0", filter: "blur(1px)" },
+        },
+        shrink: {
+          from: { width: "100%" },
+          to: { width: "0" },
         },
         exit: {
-          from: {"grid-template-rows": "1fr", filter: "blur(0px)"},
-          to: {"grid-template-rows": "0fr", filter: "blur(0.5rem)"},
-        }
-      }
+          from: { "grid-template-rows": "1fr" },
+          to: { "grid-template-rows": "0fr" },
+        },
+      },
     },
   },
   plugins: [],

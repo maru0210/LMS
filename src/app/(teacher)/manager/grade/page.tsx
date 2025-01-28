@@ -1,24 +1,23 @@
-import {checkStatus} from "@/app/lib/supabase/auth";
-import Navigation from "@/app/components/Navigation";
-import {getExamLog} from "@/app/(teacher)/manager/grade/actions";
-import {getProfile} from "@/app/lib/supabase/actions";
-import {getExam} from "@/app/(student)/exam/actions";
+import { getExamSummary } from "@/app/(student)/exam/actions";
+import { getExamLog } from "@/app/(teacher)/manager/grade/actions";
+import Navigation from "@/components/Navigation";
+import { verifyUserStatus } from "@/lib/supabase/auth";
+import { getProfile } from "@/lib/supabase/profile";
 
 export default async function Grade() {
-  await checkStatus("teacher");
+  await verifyUserStatus("teacher");
 
   const examLog = await getExamLog();
-  const examFinLog
-    = examLog.filter(value => value.action === "finish");
+  const examFinLog = examLog.filter((value) => value.action === "finish");
 
   const profiles = new Map<string, string>();
   const exams = new Map<string, string>();
   for (const value of examFinLog) {
     if (profiles.get(value.user) === undefined) {
-      profiles.set(value.user, (await getProfile(value.user)).name)
+      profiles.set(value.user, (await getProfile(value.user)).name);
     }
     if (exams.get(value.exam) === undefined) {
-      exams.set(value.exam, (await getExam(value.exam)).name);
+      exams.set(value.exam, (await getExamSummary(value.exam)).name);
     }
   }
 
@@ -26,7 +25,7 @@ export default async function Grade() {
     <Navigation isAdmin={true}>
       <h1 className="mb-4 text-xl">成績</h1>
       <div>
-        {examFinLog.map(value => (
+        {examFinLog.map((value) => (
           <div className="flex" key={value.id}>
             <p className="w-32">{profiles.get(value.user)}</p>
             <p className="w-32">{exams.get(value.exam)}</p>
@@ -35,5 +34,5 @@ export default async function Grade() {
         ))}
       </div>
     </Navigation>
-  )
+  );
 }
